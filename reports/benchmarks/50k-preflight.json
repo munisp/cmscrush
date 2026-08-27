@@ -1,0 +1,99 @@
+{
+  "benchmark_name": "crush-flink-ray-gnn-50k",
+  "target_claims_per_second": 50000,
+  "generated_at": "2026-08-27T12:07:31.916334+00:00",
+  "status": "BLOCKED",
+  "findings": [
+    {
+      "kind": "binary",
+      "name": "kafka-console-producer",
+      "available": false
+    },
+    {
+      "kind": "binary",
+      "name": "flink",
+      "available": false
+    },
+    {
+      "kind": "binary",
+      "name": "ray",
+      "available": false
+    },
+    {
+      "kind": "binary",
+      "name": "kubectl",
+      "available": true
+    },
+    {
+      "kind": "endpoint",
+      "name": "KAFKA_BOOTSTRAP",
+      "description": "Kafka bootstrap endpoint for healthcare.claim.received.v1",
+      "configured": false,
+      "reachable": false
+    },
+    {
+      "kind": "endpoint",
+      "name": "FLINK_REST_URL",
+      "description": "Flink REST URL for the deployed CEP job",
+      "configured": false,
+      "reachable": false
+    },
+    {
+      "kind": "endpoint",
+      "name": "RAY_GNN_URL",
+      "description": "Ray Serve or GNN inference endpoint",
+      "configured": false,
+      "reachable": false
+    },
+    {
+      "kind": "endpoint",
+      "name": "DECISION_SERVICE_URL",
+      "description": "Go decision-service endpoint",
+      "configured": false,
+      "reachable": false
+    },
+    {
+      "kind": "endpoint",
+      "name": "PROMETHEUS_URL",
+      "description": "Prometheus endpoint used to gather measured metrics",
+      "configured": false,
+      "reachable": false
+    }
+  ],
+  "required_measurements": {
+    "flink": [
+      "records_in_per_second",
+      "records_out_per_second",
+      "kafka_consumer_lag",
+      "watermark_lag_ms",
+      "end_to_end_latency_p50_p95_p99_ms",
+      "checkpoint_duration_ms",
+      "checkpoint_success_rate",
+      "state_size_bytes",
+      "busy_time_ms_per_second",
+      "backpressured_time_ms_per_second"
+    ],
+    "ray_gnn": [
+      "request_latency_p50_p95_p99_ms",
+      "queue_wait_ms",
+      "actor_execution_ms",
+      "graph_sampling_ms",
+      "serialization_ms",
+      "batch_size",
+      "worker_count",
+      "cpu_utilization",
+      "gpu_utilization",
+      "host_memory_bytes",
+      "gpu_memory_bytes",
+      "error_rate",
+      "abstention_rate"
+    ],
+    "decision": [
+      "decision_latency_p50_p95_p99_ms",
+      "rules_only_fallback_rate",
+      "gnn_timeout_rate",
+      "decision_error_rate"
+    ]
+  },
+  "blocking_reason": "A measured end-to-end result requires deployed Kafka, Flink, Ray/PyG, Go decision service, and Prometheus. Synthetic/in-process timings are not reported as Flink/Ray pipeline results."
+}
