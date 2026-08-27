@@ -17,5 +17,11 @@
 
 # Local data and operational state
 .local/
-coverage/
+/coverage/
+services/lakehouse/.coverage
+/reports/deck/
+/reports/coverage/*.out
+/reports/coverage/*.txt
+/reports/coverage/*.json
+/reports/coverage/helm-rendered.yaml
 .DS_Store
