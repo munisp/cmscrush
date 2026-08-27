@@ -1,0 +1,108 @@
+<!--
+  CRUSH healthcare infrastructure security rules.
+  Expected decoder fields are privacy-safe: asset_class, sensitive_zone, path_class,
+  route_class, action_class, principal_token, service_account_token, destination_hash,
+  bytes_out_bucket, process_image_sha256, and cti_indicator_id.
+  Raw PHI, claim identifiers, patient identifiers, request bodies, and full paths are not decoded.
+-->
+<group name="crush,healthcare_infrastructure,">
+  <rule id="110500" level="0">
+    <decoded_as>json</decoded_as>
+    <field name="crush_event_type">healthcare_security</field>
+    <description>CRUSH healthcare infrastructure telemetry base event</description>
+    <group>crush,healthcare_infrastructure,</group>
+  </rule>
+
+  <rule id="110501" level="8">
+    <if_sid>110500</if_sid>
+    <field name="event_class">fim</field>
+    <field name="sensitive_zone">phi_(export|storage|integration)</field>
+    <field name="action_class">(modified|deleted|permissions_changed)</field>
+    <description>CRUSH: sensitive healthcare infrastructure file or permission changed</description>
+    <group>fim,hipaa,crush_sensitive_path,</group>
+  </rule>
+
+  <rule id="110502" level="12" frequency="3" timeframe="900">
+    <if_matched_sid>110501</if_matched_sid>
+    <same_field>principal_token</same_field>
+    <same_field>asset_token</same_field>
+    <description>CRUSH: repeated sensitive healthcare file changes by same technical principal</description>
+    <group>fim,hipaa,crush_incident_candidate,</group>
+  </rule>
+
+  <rule id="110503" level="10">
+    <if_sid>110500</if_sid>
+    <field name="event_class">process</field>
+    <field name="action_class">(archive_created|export_tool_started|cloud_cli_started)</field>
+    <field name="sensitive_zone">phi_(export|storage|integration)</field>
+    <description>CRUSH: export or archive tool executed in sensitive healthcare zone</description>
+    <group>process_monitoring,hipaa,crush_export_tool,</group>
+  </rule>
+
+  <rule id="110504" level="14" frequency="1" timeframe="900">
+    <if_matched_sid>110501,110503</if_matched_sid>
+    <same_field>principal_token</same_field>
+    <same_field>asset_token</same_field>
+    <description>CRUSH: sensitive file change followed by export or archive process</description>
+    <group>fim,process_monitoring,hipaa,crush_incident_candidate,</group>
+  </rule>
+
+  <rule id="110505" level="10" frequency="5" timeframe="300">
+    <if_sid>110500</if_sid>
+    <field name="event_class">api_access</field>
+    <field name="route_class">(fhir_bulk_export|claims_export|document_export|admin_download)</field>
+    <field name="bytes_out_bucket">(high|critical)</field>
+    <same_field>principal_token</same_field>
+    <description>CRUSH: repeated high-volume healthcare export endpoint access</description>
+    <group>api,hipaa,crush_data_exfiltration_candidate,</group>
+  </rule>
+
+  <rule id="110506" level="14" frequency="1" timeframe="1800">
+    <if_matched_sid>110505</if_matched_sid>
+    <if_sid>110500</if_sid>
+    <field name="event_class">network_egress</field>
+    <field name="destination_reputation">(unknown|malicious|new_destination)</field>
+    <field name="bytes_out_bucket">(high|critical)</field>
+    <same_field>principal_token</same_field>
+    <description>CRUSH: abnormal healthcare API export followed by anomalous outbound transfer</description>
+    <group>api,network,hipaa,crush_incident_candidate,</group>
+  </rule>
+
+  <rule id="110507" level="15">
+    <if_sid>110500</if_sid>
+    <field name="cti_indicator_id">.+</field>
+    <field name="sensitive_zone">phi_(export|storage|integration)</field>
+    <description>CRUSH: active OpenCTI indicator matched on sensitive healthcare infrastructure</description>
+    <group>threat_intel,hipaa,crush_cti_match,crush_incident_candidate,</group>
+  </rule>
+
+  <rule id="110508" level="13" frequency="2" timeframe="900">
+    <if_sid>110500</if_sid>
+    <field name="event_class">kubernetes_audit</field>
+    <field name="action_class">(secret_read|pod_exec|serviceaccount_token_use)</field>
+    <field name="sensitive_zone">phi_(export|storage|integration)</field>
+    <same_field>service_account_token</same_field>
+    <description>CRUSH: privileged Kubernetes action in sensitive healthcare workload</description>
+    <group>kubernetes,hipaa,crush_privilege_escalation,crush_incident_candidate,</group>
+  </rule>
+
+  <rule id="110509" level="15" frequency="1" timeframe="1800">
+    <if_matched_sid>110508</if_matched_sid>
+    <if_sid>110500</if_sid>
+    <field name="event_class">network_egress</field>
+    <field name="destination_reputation">(unknown|malicious|new_destination)</field>
+    <field name="bytes_out_bucket">(high|critical)</field>
+    <same_field>service_account_token</same_field>
+    <description>CRUSH: privileged service account followed by anomalous sensitive workload egress</description>
+    <group>kubernetes,network,hipaa,crush_incident_candidate,</group>
+  </rule>
+
+  <rule id="110510" level="16">
+    <if_sid>110500</if_sid>
+    <field name="event_class">ransomware_signal</field>
+    <field name="sensitive_zone">phi_(export|storage|integration)</field>
+    <field name="action_class">(mass_rename|mass_modify|backup_control_changed)</field>
+    <description>CRUSH: ransomware-like behavior in sensitive healthcare infrastructure</description>
+    <group>fim,ransomware,hipaa,crush_incident_candidate,</group>
+  </rule>
+</group>

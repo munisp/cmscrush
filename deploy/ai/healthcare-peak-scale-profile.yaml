@@ -1,0 +1,169 @@
+# CRUSH 50k-cps evaluation overlay. Values are benchmark starting points, not certified production capacity.
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: crush-online-critical
+value: 100000
+preemptionPolicy: PreemptLowerPriority
+globalDefault: false
+description: Online healthcare CEP, GNN gateway, and decision workloads.
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: crush-offline-training
+value: 1000
+preemptionPolicy: Never
+globalDefault: false
+description: Preemptible Ray backtesting and model-training workloads.
+---
+apiVersion: flink.apache.org/v1beta1
+kind: FlinkDeployment
+metadata:
+  name: crush-healthcare-claims-peak
+  namespace: crush-platform
+  labels:
+    app.kubernetes.io/part-of: crush
+    crush.io/profile: peak-evaluation
+spec:
+  image: ghcr.io/munisp/cmscrush/flink-healthcare-sedona:0.1.0
+  flinkVersion: v2_3
+  serviceAccount: crush-flink
+  flinkConfiguration:
+    taskmanager.numberOfTaskSlots: "1"
+    parallelism.default: "16"
+    state.backend.type: rocksdb
+    state.backend.incremental: "true"
+    execution.checkpointing.interval: 30 s
+    execution.checkpointing.timeout: 5 min
+    execution.checkpointing.mode: EXACTLY_ONCE
+    execution.checkpointing.dir: s3://crush-checkpoints/healthcare/claims-peak
+    execution.checkpointing.savepoint-dir: s3://crush-savepoints/healthcare/claims-peak
+    metrics.reporter.prom.class: org.apache.flink.metrics.prometheus.PrometheusReporter
+    metrics.reporter.prom.port: "9249"
+  jobManager:
+    resource: {cpu: 2, memory: 8g}
+  taskManager:
+    resource: {cpu: 4, memory: 16g}
+  podTemplate:
+    spec:
+      priorityClassName: crush-online-critical
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels: {app: crush-healthcare-claims-peak}
+  job:
+    jarURI: local:///opt/flink/usrlib/crush-healthcare-features.jar
+    parallelism: 16
+    upgradeMode: savepoint
+    state: running
+---
+apiVersion: ray.io/v1
+kind: RayService
+metadata:
+  name: crush-gnn-online
+  namespace: crush-platform
+  labels:
+    app.kubernetes.io/part-of: crush
+    crush.io/profile: peak-evaluation
+spec:
+  serveConfigV2: |
+    applications:
+      - name: gnn-assessment
+        route_prefix: /v1/gnn
+        import_path: crush_gnn.service:app
+        deployments:
+          - name: gnn_gateway
+            num_replicas: 4
+            autoscaling_config:
+              min_replicas: 4
+              initial_replicas: 4
+              max_replicas: 20
+              target_ongoing_requests: 16
+            ray_actor_options: {num_cpus: 1}
+          - name: gnn_inference
+            num_replicas: 4
+            autoscaling_config:
+              min_replicas: 4
+              initial_replicas: 4
+              max_replicas: 16
+              target_ongoing_requests: 8
+            ray_actor_options: {num_cpus: 8, num_gpus: 1}
+  rayClusterConfig:
+    enableInTreeAutoscaling: true
+    autoscalerOptions:
+      upscalingMode: Conservative
+      idleTimeoutSeconds: 300
+      resources:
+        requests: {cpu: 500m, memory: 512Mi}
+        limits: {cpu: 500m, memory: 512Mi}
+    headGroupSpec:
+      rayStartParams: {num-cpus: "0"}
+      template:
+        spec:
+          priorityClassName: crush-online-critical
+          serviceAccountName: crush-ray-ai
+          automountServiceAccountToken: false
+          containers:
+            - name: ray-head
+              image: ghcr.io/munisp/cmscrush/ray-gnn:0.1.0
+              resources:
+                requests: {cpu: 2, memory: 8Gi}
+                limits: {cpu: 2, memory: 8Gi}
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities: {drop: [ALL]}
+    workerGroupSpecs:
+      - groupName: feature-sampler
+        replicas: 3
+        minReplicas: 3
+        maxReplicas: 12
+        rayStartParams: {num-cpus: "8"}
+        template:
+          spec:
+            priorityClassName: crush-online-critical
+            serviceAccountName: crush-ray-ai
+            automountServiceAccountToken: false
+            containers:
+              - name: ray-worker
+                image: ghcr.io/munisp/cmscrush/ray-gnn:0.1.0
+                resources:
+                  requests: {cpu: 8, memory: 32Gi}
+                  limits: {cpu: 8, memory: 32Gi}
+      - groupName: gnn-gpu
+        replicas: 4
+        minReplicas: 4
+        maxReplicas: 16
+        rayStartParams: {num-cpus: "8", num-gpus: "1"}
+        template:
+          spec:
+            priorityClassName: crush-online-critical
+            serviceAccountName: crush-ray-ai
+            automountServiceAccountToken: false
+            nodeSelector: {workload.crush.io/gpu: "true"}
+            tolerations:
+              - {key: nvidia.com/gpu, operator: Exists, effect: NoSchedule}
+            containers:
+              - name: ray-worker
+                image: ghcr.io/munisp/cmscrush/ray-gnn:0.1.0
+                resources:
+                  requests: {cpu: 8, memory: 64Gi, nvidia.com/gpu: "1"}
+                  limits: {cpu: 8, memory: 64Gi, nvidia.com/gpu: "1"}
+                securityContext:
+                  allowPrivilegeEscalation: false
+                  readOnlyRootFilesystem: true
+                  capabilities: {drop: [ALL]}
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: crush-gnn-gateway-availability
+  namespace: crush-platform
+spec:
+  minAvailable: 3
+  selector:
+    matchLabels: {serve-deployment: gnn_gateway}
+# The candidate-selection cap (initially <=500 GNN requests/s) is enforced by the Flink/feature contract, not this manifest.

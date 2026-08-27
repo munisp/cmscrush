@@ -1,0 +1,149 @@
+# Wazuh -> CRUSH security event -> OpenCTI STIX 2.1 mapping.
+# This is a data contract, not a raw-log export. Do not send PHI, claims, patient identifiers,
+# clinical text, payload bodies, complete URLs/query strings, or raw filesystem paths to OpenCTI.
+apiVersion: crush.io/v1alpha1
+kind: OpenCTIStixMapping
+metadata:
+  name: healthcare-provider-infrastructure-security
+  purpose: Cybersecurity detection and investigation only
+  inputTopic: security.wazuh.alert.v1
+  outputTopic: security.sighting.v1
+  stixSpec: "2.1"
+privacy:
+  requiredDropFields:
+    - patient_name
+    - patient_identifier
+    - beneficiary_id
+    - claim_id
+    - encounter_id
+    - clinical_note
+    - request_body
+    - response_body
+    - query_string
+    - raw_command_line
+    - full_path
+  requiredTokenizedFields:
+    - security_tenant_id
+    - principal_id
+    - host_id
+    - asset_id
+    - kubernetes_service_account
+  allowedCleartextFields:
+    - event_time
+    - alert_rule_id
+    - severity_band
+    - asset_class
+    - path_class
+    - route_class
+    - action_class
+    - process_image_sha256
+    - file_sha256
+    - destination_type
+    - destination_value_sha256
+    - bytes_out_bucket
+    - cti_indicator_id
+    - cti_indicator_version
+    - mitre_attack_ids
+    - evidence_reference
+  fingerprint:
+    algorithm: HMAC-SHA-256
+    input: [security_tenant_id, wazuh_alert_id, event_time, alert_rule_id, process_image_sha256, file_sha256, destination_value_sha256]
+    rotation: security-tokenization-key-version
+mappings:
+  # CTI imports create indicators independently. Wazuh does not create an Indicator from an alert.
+  indicator_context:
+    source: OpenCTI indicator stream
+    stix_type: indicator
+    required:
+      - id
+      - pattern
+      - pattern_type
+      - valid_from
+    optional:
+      - valid_until
+      - confidence
+      - labels
+      - external_references
+    match:
+      wazuh_fields: [cti_indicator_id, destination_value_sha256, process_image_sha256, file_sha256]
+      no_match_behavior: omit_indicator_and_sighting
+
+  # Observed Data represents one sanitized machine observation in the restricted security domain.
+  observed_data:
+    emit_when: "alert is correlated or analyst-selected for CTI reporting"
+    stix_type: observed-data
+    fields:
+      id: "observed-data--uuidv5(HMAC(security_tenant_id, fingerprint))"
+      created: event.ingested_at
+      modified: event.ingested_at
+      first_observed: event.event_time
+      last_observed: event.event_time
+      number_observed: 1
+      object_refs:
+        - "file--uuidv5(process_image_sha256) if process_image_sha256 is present"
+        - "file--uuidv5(file_sha256) if file_sha256 is present"
+        - "ipv4-addr--uuidv5(destination_value_sha256) only if destination_type=ip"
+        - "domain-name--uuidv5(destination_value_sha256) only if destination_type=domain"
+      labels: [crush, healthcare-infrastructure, sanitized]
+      external_references:
+        - source_name: crush-security-evidence
+          external_id: event.evidence_reference
+          description: "Opaque reference to restricted Wazuh/OpenSearch/Delta evidence; no raw payload is exported."
+    prohibited: [patient_data, claim_data, raw_logs, raw_path, raw_url, user_cleartext]
+
+  # Security tenant identity represents the organization/tenant—not an individual provider or patient.
+  sighting:
+    emit_when: "active approved indicator matched AND incident triage approves sighting export"
+    stix_type: sighting
+    fields:
+      id: "sighting--uuidv5(HMAC(cti_indicator_id, fingerprint, cti_indicator_version))"
+      sighting_of_ref: event.cti_indicator_id
+      where_sighted_refs:
+        - "identity--uuidv5(HMAC(security_tenant_id, security-tokenization-key-version))"
+      observed_data_refs:
+        - "observed-data mapping id"
+      first_seen: event.event_time
+      last_seen: event.event_time
+      count: 1
+      confidence: event.cti_match_confidence
+      external_references:
+        - source_name: crush-security-evidence
+          external_id: event.evidence_reference
+    approval:
+      required: true
+      workflow: temporal-security-incident-triage
+      permitted_approvers: [security_analyst, incident_commander]
+
+  # The contextual link explains that the active Indicator is based on the sanitized observation.
+  indicator_based_on_observed_data:
+    emit_when: "sighting emitted"
+    stix_type: relationship
+    fields:
+      id: "relationship--uuidv5(HMAC(cti_indicator_id, observed_data_id, based-on))"
+      relationship_type: based-on
+      source_ref: event.cti_indicator_id
+      target_ref: "observed-data mapping id"
+      description: "Sanitized CRUSH observation supports this indicator context; full evidence remains restricted."
+
+  # Optional Infrastructure represents an opaque asset class or service—not a provider individual.
+  infrastructure:
+    emit_when: "asset context is required by approved investigation"
+    stix_type: infrastructure
+    fields:
+      id: "infrastructure--uuidv5(HMAC(security_tenant_id, asset_id, key-version))"
+      name: "crush-asset-${asset_class}-${asset_token_prefix}"
+      infrastructure_types: [unknown]
+      labels: [healthcare-infrastructure, pseudonymous]
+    prohibited: [provider_name, patient_name, real_hostname, full_ip, raw_kubernetes_namespace]
+
+validation:
+  requiredStixFields: [type, spec_version, id, created, modified]
+  bundleMaxObjects: 1000
+  deconflictionKey: [stix_type, id, modified]
+  deduplicationWindow: 24h
+  rejectIf:
+    - "any prohibited source field is present"
+    - "sighting has no active approved indicator"
+    - "sighting lacks analyst/incident-commander approval"
+    - "observed-data contains a raw healthcare identifier"
+    - "timestamp is outside indicator valid_from/valid_until"

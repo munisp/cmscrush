@@ -1,0 +1,22 @@
+<!--
+  CRUSH normalized healthcare-security JSON decoder.
+  Upstream forwarders must remove PHI, claim/encounter IDs, clinical content, raw URLs,
+  raw paths, raw request/response bodies, and un-tokenized identities before Wazuh receives an event.
+-->
+<decoder name="crush-healthcare-security-json">
+  <prematch>"crush_event_type":"healthcare_security"</prematch>
+  <plugin_decoder>JSON_Decoder</plugin_decoder>
+</decoder>
+
+<decoder name="crush-healthcare-security-privacy-guard">
+  <parent>crush-healthcare-security-json</parent>
+  <regex>"event_class":"([A-Za-z0-9_\-]+)".*"action_class":"([A-Za-z0-9_\-]+)".*"asset_class":"([A-Za-z0-9_\-]+)"</regex>
+  <order>event_class,action_class,asset_class</order>
+</decoder>
+
+<!-- Fields expected from JSON_Decoder and used by 110500-series rules:
+  crush_event_type, event_class, action_class, sensitive_zone, path_class, route_class,
+  principal_token, service_account_token, asset_token, destination_reputation,
+  destination_hash, bytes_out_bucket, process_image_sha256, file_sha256,
+  cti_indicator_id, cti_indicator_version, evidence_reference.
+-->
