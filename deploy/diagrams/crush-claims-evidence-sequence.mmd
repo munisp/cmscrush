@@ -1,0 +1,31 @@
+sequenceDiagram
+  participant SRC as Claims/enrollment/document sources
+  participant ING as Go/Python normalizers
+  participant K as Kafka
+  participant F as Flink stateful streams
+  participant DL as Delta Lake bronze/silver/gold
+  participant ER as Entity resolver + temporal graph
+  participant FE as Feast/Redis features
+  participant AI as Ray GNN + NLP/LLM gateways
+  participant DEC as Go rule-first decision service
+  participant CASE as Temporal case workflow
+  participant REV as Coder/investigator reviewer
+
+  SRC->>ING: X12/FHIR/document/list/contact event
+  ING->>K: Canonical event with tenant, purpose, lineage, hash
+  K->>F: Keyed event-time stream
+  F->>F: Dedup, watermark, CEP, windows, filing/deadline checks
+  F->>DL: Append normalized silver facts and feature deltas
+  F->>ER: Entity/relationship delta
+  ER->>ER: Exact identifiers, probabilistic match, abstain if uncertain
+  ER->>DL: Versioned graph edge and evidence
+  ER->>FE: Materialize approved point-in-time features
+  DL->>AI: Frozen snapshots for Ray training/backtest
+  FE->>AI: Bounded GNN/NLP assessment request
+  AI-->>DEC: Calibrated advisory + evidence refs or abstain
+  DEC->>DEC: Hard rules, quality gates, score fusion, reason codes
+  DEC->>CASE: DecisionRecord + CaseTask
+  CASE->>REV: Source spans, graph subgraph, citations, uncertainty
+  REV-->>CASE: Accept, modify, reject, or request more evidence
+  CASE->>DL: Disposition and outcome label candidate
+  CASE->>DEC: Authorized disposition — no direct model action

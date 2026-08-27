@@ -1,0 +1,148 @@
+{{- if .Values.healthcareAI.enabled }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.healthcareAI.namespace }}
+  labels:
+    app.kubernetes.io/part-of: crush
+    crush.io/data-class: healthcare-integrity
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: crush-ai-runtime
+  namespace: {{ .Values.healthcareAI.namespace }}
+  labels:
+    app.kubernetes.io/part-of: crush
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crush-clinical-evidence-gateway
+  namespace: {{ .Values.healthcareAI.namespace }}
+  labels:
+    app.kubernetes.io/name: clinical-evidence-gateway
+    app.kubernetes.io/part-of: crush
+spec:
+  replicas: {{ .Values.healthcareAI.clinicalEvidence.replicas }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: clinical-evidence-gateway
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: clinical-evidence-gateway
+        app.kubernetes.io/part-of: crush
+        crush.io/access-financial-services: "false"
+    spec:
+      serviceAccountName: crush-ai-runtime
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile: {type: RuntimeDefault}
+      containers:
+        - name: clinical-evidence-gateway
+          image: "{{ .Values.healthcareImages.clinicalEvidence.repository }}:{{ .Values.healthcareImages.clinicalEvidence.tag }}"
+          imagePullPolicy: IfNotPresent
+          ports: [{name: http, containerPort: 8080}]
+          env:
+            - {name: EVIDENCE_SCHEMA_VERSION, value: "EvidencePack.v1"}
+            - {name: PHI_LOGGING, value: "disabled"}
+            - {name: RETRIEVAL_ALLOWLIST, value: "{{ .Values.healthcareAI.clinicalEvidence.retrievalAllowlist }}"}
+          resources:
+            {{- toYaml .Values.healthcareAI.clinicalEvidence.resources | nindent 12 }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: {drop: [ALL]}
+          readinessProbe: {httpGet: {path: /readyz, port: http}}
+          livenessProbe: {httpGet: {path: /healthz, port: http}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: crush-clinical-evidence-gateway
+  namespace: {{ .Values.healthcareAI.namespace }}
+  labels: {app.kubernetes.io/part-of: crush}
+spec:
+  type: ClusterIP
+  selector: {app.kubernetes.io/name: clinical-evidence-gateway}
+  ports: [{name: http, port: 8080, targetPort: http}]
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crush-gnn-inference
+  namespace: {{ .Values.healthcareAI.namespace }}
+  labels:
+    app.kubernetes.io/name: gnn-inference
+    app.kubernetes.io/part-of: crush
+spec:
+  replicas: {{ .Values.healthcareAI.gnn.replicas }}
+  selector:
+    matchLabels: {app.kubernetes.io/name: gnn-inference}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: gnn-inference
+        app.kubernetes.io/part-of: crush
+        crush.io/access-financial-services: "false"
+    spec:
+      serviceAccountName: crush-ai-runtime
+      automountServiceAccountToken: false
+      nodeSelector:
+        {{- toYaml .Values.healthcareAI.gnn.nodeSelector | nindent 8 }}
+      tolerations:
+        {{- toYaml .Values.healthcareAI.gnn.tolerations | nindent 8 }}
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile: {type: RuntimeDefault}
+      containers:
+        - name: gnn-inference
+          image: "{{ .Values.healthcareImages.gnn.repository }}:{{ .Values.healthcareImages.gnn.tag }}"
+          ports: [{name: http, containerPort: 8080}]
+          env:
+            - {name: MODEL_ARTIFACT_URI, value: "{{ .Values.healthcareAI.gnn.modelArtifactUri }}"}
+            - {name: GRAPH_SNAPSHOT_REQUIRED, value: "true"}
+            - {name: ABSTAIN_ON_STALE_GRAPH, value: "true"}
+            - {name: FINANCIAL_EGRESS, value: "disabled"}
+          resources:
+            {{- toYaml .Values.healthcareAI.gnn.resources | nindent 12 }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: {drop: [ALL]}
+          readinessProbe: {httpGet: {path: /readyz, port: http}}
+          livenessProbe: {httpGet: {path: /healthz, port: http}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: crush-gnn-inference
+  namespace: {{ .Values.healthcareAI.namespace }}
+  labels: {app.kubernetes.io/part-of: crush}
+spec:
+  type: ClusterIP
+  selector: {app.kubernetes.io/name: gnn-inference}
+  ports: [{name: http, port: 8080, targetPort: http}]
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: healthcare-ai-deny-financial-egress
+  namespace: {{ .Values.healthcareAI.namespace }}
+spec:
+  podSelector: {}
+  policyTypes: [Egress]
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels: {kubernetes.io/metadata.name: {{ .Values.healthcareAI.allowedDataNamespace }}}
+    - to:
+        - namespaceSelector:
+            matchLabels: {kubernetes.io/metadata.name: kube-system}
+      ports:
+        - {protocol: UDP, port: 53}
+        - {protocol: TCP, port: 53}
+  # Deliberately no rule permits the financial namespace or Mojaloop/TigerBeetle endpoints.
+{{- end }}

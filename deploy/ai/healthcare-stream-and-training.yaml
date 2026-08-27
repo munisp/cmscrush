@@ -1,0 +1,118 @@
+apiVersion: flink.apache.org/v1beta1
+kind: FlinkDeployment
+metadata:
+  name: crush-healthcare-claims-features
+  namespace: crush-platform
+  labels:
+    app.kubernetes.io/part-of: crush
+    crush.io/data-class: healthcare-integrity
+spec:
+  image: ghcr.io/munisp/cmscrush/flink-healthcare-sedona:0.1.0
+  flinkVersion: v2_3
+  serviceAccount: crush-flink
+  flinkConfiguration:
+    taskmanager.numberOfTaskSlots: "1"
+    parallelism.default: "3"
+    jobmanager.memory.process.size: 4096m
+    taskmanager.memory.process.size: 8192m
+    state.backend.type: rocksdb
+    execution.checkpointing.interval: 30 s
+    execution.checkpointing.timeout: 5 min
+    execution.checkpointing.mode: EXACTLY_ONCE
+    execution.checkpointing.dir: s3://crush-checkpoints/healthcare/claims-features
+    execution.checkpointing.savepoint-dir: s3://crush-savepoints/healthcare/claims-features
+    kubernetes.rest-service.exposed.type: ClusterIP
+  jobManager:
+    resource:
+      cpu: 2
+      memory: 4g
+  taskManager:
+    resource:
+      cpu: 2
+      memory: 8g
+  job:
+    jarURI: local:///opt/flink/usrlib/crush-healthcare-features.jar
+    parallelism: 3
+    upgradeMode: savepoint
+    state: running
+---
+apiVersion: ray.io/v1
+kind: RayJob
+metadata:
+  name: crush-gnn-training
+  namespace: crush-platform
+  labels:
+    app.kubernetes.io/part-of: crush
+    crush.io/data-class: healthcare-integrity
+spec:
+  shutdownAfterJobFinishes: true
+  ttlSecondsAfterFinished: 86400
+  entrypoint: >-
+    python /opt/crush/jobs/train_gnn.py
+    --input s3://crush-lakehouse/gold/healthcare/graph/snapshot_date=${GRAPH_SNAPSHOT_DATE}
+    --output s3://crush-models/gnn/candidates/${RAY_JOB_ID}
+    --point-in-time true --shadow-only true
+  runtimeEnvYAML: |
+    pip:
+      - torch
+      - torch-geometric
+      - delta-spark
+      - shap
+    env_vars:
+      PHI_LOGGING: "disabled"
+      MODEL_PROMOTION_REQUIRES_GOVERNANCE: "true"
+      FINANCIAL_EGRESS: "disabled"
+  rayClusterSpec:
+    enableInTreeAutoscaling: true
+    autoscalerOptions:
+      idleTimeoutSeconds: 300
+      upscalingMode: Conservative
+      resources:
+        requests: {cpu: 500m, memory: 512Mi}
+        limits: {cpu: 500m, memory: 512Mi}
+    headGroupSpec:
+      rayStartParams: {num-cpus: "0"}
+      template:
+        spec:
+          serviceAccountName: crush-ray-ai
+          automountServiceAccountToken: false
+          containers:
+            - name: ray-head
+              image: ghcr.io/munisp/cmscrush/ray-gnn:0.1.0
+              resources:
+                requests: {cpu: "2", memory: 8Gi}
+                limits: {cpu: "2", memory: 8Gi}
+    workerGroupSpecs:
+      - groupName: cpu-train
+        replicas: 0
+        minReplicas: 0
+        maxReplicas: 10
+        rayStartParams: {num-cpus: "8"}
+        template:
+          spec:
+            serviceAccountName: crush-ray-ai
+            automountServiceAccountToken: false
+            containers:
+              - name: ray-worker
+                image: ghcr.io/munisp/cmscrush/ray-gnn:0.1.0
+                resources:
+                  requests: {cpu: "8", memory: 32Gi}
+                  limits: {cpu: "8", memory: 32Gi}
+      - groupName: gpu-train
+        replicas: 0
+        minReplicas: 0
+        maxReplicas: 4
+        rayStartParams: {num-cpus: "8", num-gpus: "1"}
+        template:
+          spec:
+            serviceAccountName: crush-ray-ai
+            automountServiceAccountToken: false
+            nodeSelector: {workload.crush.io/gpu: "true"}
+            tolerations:
+              - {key: nvidia.com/gpu, operator: Exists, effect: NoSchedule}
+            containers:
+              - name: ray-worker
+                image: ghcr.io/munisp/cmscrush/ray-gnn:0.1.0
+                resources:
+                  requests: {cpu: "8", memory: 64Gi, nvidia.com/gpu: "1"}
+                  limits: {cpu: "8", memory: 64Gi, nvidia.com/gpu: "1"}

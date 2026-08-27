@@ -1,0 +1,14 @@
+flowchart TB
+  G[Plane 9 Governance & Transparency\nMLflow/DVC · Evidently/NannyML · SHAP · model cards · audit]
+  A[Plane 8 Case & Action\nTemporal clocks · reviewer workspace · evidence packs · appeals]
+  D[Plane 7 Decision\nGo rules · clinical coverage logic · score fusion · action routing]
+  M[Plane 6 Models\nLightGBM · PyOD · PyG/DGL GNN · clinical NLP · OCR/layout · Qwen/Mistral · Whisper]
+  F[Plane 5 Feature & Semantic\nFeast/Redis · entity views · graph features · streaming aggregates]
+  E[Plane 4 Entity Resolution & Knowledge Graph\nNPI/PECOS · ownership · referral · provider/beneficiary/lab/DMEPOS graph]
+  L[Plane 3 Lakehouse\nDelta Lake · Parquet · Spark · Sedona · DataFusion · evidence snapshots]
+  S[Plane 2 Streaming\nKafka · Flink CEP · keyed state · dedup · materialized views]
+  I[Plane 1 Ingest\nX12 · FHIR/CDA · enrollment/lists · claims · documents · speech/contact]
+  I --> S --> L --> E --> F --> M --> D --> A --> G
+  G -. policies, versions, release gates .-> D
+  G -. retention, tenancy, fairness, audit .-> M
+  A -. reviewer dispositions and outcomes .-> G

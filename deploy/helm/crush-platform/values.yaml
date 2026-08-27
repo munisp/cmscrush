@@ -52,3 +52,26 @@ featureFlags:
   mojaloopAdapter: false
   rayModelTraining: false
   openctiEnrichment: false
+
+healthcareAI:
+  enabled: false
+  namespace: crush-healthcare-ai
+  allowedDataNamespace: crush-platform
+  clinicalEvidence:
+    replicas: 2
+    retrievalAllowlist: "guidelines,terminology,approved-policy"
+    resources:
+      requests: {cpu: 500m, memory: 1Gi}
+      limits: {cpu: "2", memory: 4Gi}
+  gnn:
+    replicas: 2
+    modelArtifactUri: s3://crush-models/gnn/approved/current
+    nodeSelector: {workload.crush.io/ai: "true"}
+    tolerations: []
+    resources:
+      requests: {cpu: "2", memory: 4Gi}
+      limits: {cpu: "4", memory: 8Gi}
+
+healthcareImages:
+  clinicalEvidence: {repository: ghcr.io/munisp/cmscrush/clinical-evidence-gateway, tag: 0.1.0}
+  gnn: {repository: ghcr.io/munisp/cmscrush/gnn-inference, tag: 0.1.0}
