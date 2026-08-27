@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical AI Evidence Gates</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        .slide-container { width: 1280px; min-height: 720px; background: #f6f8fb; color: #17364d; font-family: Arial, Helvetica, sans-serif; padding: 48px 72px 0; position: relative; }
+        .eyebrow { font-size: 13px; letter-spacing: 2.5px; color: #c53b30; font-weight: 700; text-transform: uppercase; }
+        .title { font-size: 42px; color: #123f65; margin-top: 12px; font-weight: 800; letter-spacing: -1px; }
+        
+        .pipeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 40px; }
+        .step { border-top: 4px solid #164f7d; padding-top: 15px; }
+        .step h3 { font-size: 18px; color: #123f65; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .step p { font-size: 15px; color: #5c7484; line-height: 1.4; }
+        .step .tech { font-size: 12px; font-weight: 700; color: #2d9079; margin-top: 10px; }
+
+        .gates-section { margin-top: 50px; border-top: 1px solid #cbd7df; padding-top: 30px; }
+        .gates-section h2 { font-size: 20px; color: #123f65; margin-bottom: 20px; font-weight: 700; }
+        .gates-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        
+        .gate-item { display: grid; grid-template-columns: 40px 1fr; gap: 15px; align-items: start; }
+        .gate-num { width: 32px; height: 32px; background: #c88d17; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; }
+        .gate-content h4 { font-size: 17px; color: #123f65; margin-bottom: 4px; }
+        .gate-content p { font-size: 14px; color: #5c7484; line-height: 1.3; }
+
+        .footer { position: absolute; bottom: 29px; left: 72px; right: 72px; border-top: 1px solid #d5dfe6; padding-top: 12px; font-size: 12px; color: #8497a3; display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="eyebrow">06 · Model Plane (Clinical)</div>
+        <div class="title">Clinical AI is gated by source evidence.</div>
+        
+        <div class="pipeline">
+            <div class="step">
+                <h3>1. Layout</h3>
+                <p>Coordinate-anchored text extraction from PDF, TIFF, and fax images.</p>
+                <div class="tech">PaddleOCR · docTR</div>
+            </div>
+            <div class="step">
+                <h3>2. Context</h3>
+                <p>Clinical NLP for section detection, negation, and uncertainty.</p>
+                <div class="tech">MedSpaCy · cTAKES</div>
+            </div>
+            <div class="step">
+                <h3>3. Mapping</h3>
+                <p>Terminology resolution to active, approved medical code systems.</p>
+                <div class="tech">UMLS · SNOMED · ICD-10</div>
+            </div>
+            <div class="step">
+                <h3>4. Grounding</h3>
+                <p>Constrained LLM evidence packs with verbatim source citations.</p>
+                <div class="tech">Qwen3 · Mistral · RAG</div>
+            </div>
+        </div>
+
+        <div class="gates-section">
+            <h2>Six Mandatory Hallucination-Control Gates</h2>
+            <div class="gates-grid">
+                <div class="gate-item">
+                    <div class="gate-num">G1</div>
+                    <div class="gate-content">
+                        <h4>Span Requirement</h4>
+                        <p>No verbatim supporting span from the source document → no code recommendation.</p>
+                    </div>
+                </div>
+                <div class="gate-item">
+                    <div class="gate-num">G2</div>
+                    <div class="gate-content">
+                        <h4>Vocabulary Constraint</h4>
+                        <p>Output restricted to valid, active codes in the approved programme version.</p>
+                    </div>
+                </div>
+                <div class="gate-item">
+                    <div class="gate-num">G3</div>
+                    <div class="gate-content">
+                        <h4>Citation Requirement</h4>
+                        <p>Every finding must cite a specific rule, guideline, and chart location.</p>
+                    </div>
+                </div>
+                <div class="gate-item">
+                    <div class="gate-num">G4</div>
+                    <div class="gate-content">
+                        <h4>Disagreement Routing</h4>
+                        <p>Mismatches between independent models trigger mandatory human review.</p>
+                    </div>
+                </div>
+                <div class="gate-item">
+                    <div class="gate-num">G5</div>
+                    <div class="gate-content">
+                        <h4>Calibrated Abstention</h4>
+                        <p>"Insufficient documentation" is a first-class output for low-confidence cases.</p>
+                    </div>
+                </div>
+                <div class="gate-item">
+                    <div class="gate-num">G6</div>
+                    <div class="gate-content">
+                        <h4>Symmetry Check</h4>
+                        <p>Both unsupported codes and missed codes must be reported symmetrically.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span>CRUSH · CLINICAL DOCUMENT INTELLIGENCE</span>
+            <span>07</span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Governance Makes the Platform Defensible</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container { width: 1280px; min-height: 720px; background: #f6f8fb; color: #17364d; font-family: Arial, sans-serif; position: relative; padding: 50px 70px 0; }
+        .eyebrow { font-size: 14px; letter-spacing: 2px; color: #455764; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
+        .title { font-size: 40px; font-weight: 800; color: #123f65; margin-bottom: 30px; border-bottom: 3px solid #455764; padding-bottom: 15px; }
+        
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 20px; }
+        
+        .section h3 { font-size: 20px; color: #123f65; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; border-left: 5px solid #c88d17; padding-left: 15px; }
+        
+        .list-item { margin-bottom: 25px; }
+        .list-item strong { display: block; font-size: 18px; color: #173f5e; margin-bottom: 5px; }
+        .list-item p { font-size: 15px; color: #5c7484; line-height: 1.4; }
+        
+        .safety-bar { position: absolute; bottom: 100px; left: 70px; right: 70px; background: #fff; border: 1px solid #d1dce5; padding: 20px 30px; display: flex; align-items: center; gap: 20px; }
+        .safety-bar i { font-size: 24px; color: #c53b30; }
+        .safety-bar p { font-size: 16px; color: #123f65; font-weight: 700; }
+
+        .footer { position: absolute; bottom: 30px; left: 70px; right: 70px; border-top: 1px solid #d5dfe6; padding-top: 15px; font-size: 12px; color: #8497a3; display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="eyebrow">Plane 09 · Governance & Roadmap</div>
+        <h1 class="title">Governance Makes the Platform Defensible</h1>
+        
+        <div class="content-grid">
+            <div class="section">
+                <h3>Governance Pillars</h3>
+                <div class="list-item">
+                    <strong>Human-in-the-Loop</strong>
+                    <p>Temporal workflows enforce reviewer identity, rationale, and statutory timers. No adverse action without human disposition.</p>
+                </div>
+                <div class="list-item">
+                    <strong>Fairness & Calibration</strong>
+                    <p>Evidently and NannyML monitor slice-level drift and disparate impact. SHAP provides evidence-based explainability.</p>
+                </div>
+                <div class="list-item">
+                    <strong>Immutable Provenance</strong>
+                    <p>Every decision is hash-linked to the exact model version, feature set, and point-in-time graph snapshot.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Delivery Roadmap</h3>
+                <div class="list-item">
+                    <strong>Model Evaluation</strong>
+                    <p>Benchmark LightGBM and GNNs on CMS SynPUF and historical provider utilization data before production release.</p>
+                </div>
+                <div class="list-item">
+                    <strong>Shadow Mode Deployment</strong>
+                    <p>Run AI models in parallel with existing rules to validate precision at review capacity and false-positive burden.</p>
+                </div>
+                <div class="list-item">
+                    <strong>Financial Boundaries</strong>
+                    <p>Integrate TigerBeetle and Mojaloop as downstream accounting/settlement controls behind separate authorization gates.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="safety-bar">
+            <i class="fas fa-shield-alt"></i>
+            <p>Core Safety Invariant: AI prioritizes and explains; authorized people and policy-controlled workflows decide.</p>
+        </div>
+
+        <div class="footer">
+            <span>CRUSH · HEALTHCARE INTEGRITY PLATFORM</span>
+            <span>10</span>
+        </div>
+    </div>
+</body>
+</html>

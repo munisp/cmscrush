@@ -1,0 +1,122 @@
+{
+  "project_info": {
+    "title": "CRUSH Healthcare Integrity Platform",
+    "created": 1787831903.414,
+    "last_updated": 1787832024.684,
+    "total_slides": 10
+  },
+  "slides": [
+    {
+      "id": "cover",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "problem",
+      "state": "edited",
+      "pageNum": 2
+    },
+    {
+      "id": "nine_planes",
+      "state": "edited",
+      "pageNum": 3
+    },
+    {
+      "id": "rfi_map",
+      "state": "edited",
+      "pageNum": 4
+    },
+    {
+      "id": "claims_path",
+      "state": "edited",
+      "pageNum": 5
+    },
+    {
+      "id": "medallion",
+      "state": "edited",
+      "pageNum": 6
+    },
+    {
+      "id": "clinical_ai",
+      "state": "edited",
+      "pageNum": 7
+    },
+    {
+      "id": "gnn",
+      "state": "edited",
+      "pageNum": 8
+    },
+    {
+      "id": "deployment",
+      "state": "edited",
+      "pageNum": 9
+    },
+    {
+      "id": "roadmap",
+      "state": "edited",
+      "pageNum": 10
+    }
+  ],
+  "outline": [
+    {
+      "id": "cover",
+      "title": "CRUSH Healthcare Integrity Platform",
+      "summary": "Healthcare program-integrity architecture for claims, enrollment, provider networks, documents, beneficiary contact, and governed AI.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "problem",
+      "title": "Healthcare Integrity Requires Evidence, Not Scores",
+      "summary": "Frame the RFI problem space and the platform principle that AI prioritizes and explains while people and policy control consequential action.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "nine_planes",
+      "title": "Nine Planes Connect Data to Due Process",
+      "summary": "Show the nine-plane reference architecture from ingestion through streaming, lakehouse, graph, features, models, decision, case, and governance.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "rfi_map",
+      "title": "One Platform Covers the RFI A–M Topics",
+      "summary": "Map the 13 RFI topic areas to the CRUSH capability domains and evidence workflows.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "claims_path",
+      "title": "Flink Turns Claims Streams into Timely Signals",
+      "summary": "Explain canonical events, event-time state, deduplication, CEP, feature materialization, and degraded-mode safety.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "medallion",
+      "title": "Delta Lake Preserves Lineage Across Medallion Layers",
+      "summary": "Show bronze, silver, and gold tables plus graph snapshots, evidence packs, and point-in-time feature contracts.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "clinical_ai",
+      "title": "Clinical AI Is Gated by Source Evidence",
+      "summary": "Explain OCR/layout, clinical NLP, terminology, retrieval-grounded LLMs, and the six mandatory evidence gates.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "gnn",
+      "title": "GNNs Reveal Temporal Provider-Network Patterns",
+      "summary": "Show temporal heterogeneous graphs, Ray training, PyTorch Geometric inference, uncertainty, subgraph evidence, and abstention.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "deployment",
+      "title": "Kubernetes Separates Streaming, Training, and Review",
+      "summary": "Present Flink, Ray, clinical evidence, GNN inference, model registry, and governance deployment patterns with resource/security boundaries.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "roadmap",
+      "title": "Governance Makes the Platform Defensible",
+      "summary": "Close with delivery priorities, model evaluation, human review, data-use controls, and optional downstream financial boundaries.",
+      "image_plan": "Use a suitable image if needed"
+    }
+  ]
+}

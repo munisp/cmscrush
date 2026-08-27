@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kubernetes Deployment Blueprint</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .slide-container { width: 1280px; min-height: 720px; background: #f6f8fb; color: #17364d; font-family: Arial, sans-serif; position: relative; padding: 50px 70px 0; }
+        .eyebrow { font-size: 14px; letter-spacing: 2px; color: #164f7d; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
+        .title { font-size: 40px; font-weight: 800; color: #123f65; margin-bottom: 30px; border-bottom: 3px solid #164f7d; padding-bottom: 15px; }
+        
+        .deploy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; }
+        .deploy-block { border-top: 5px solid #164f7d; padding-top: 15px; min-height: 220px; }
+        .deploy-block h3 { font-size: 18px; color: #123f65; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .spec-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+        .spec-table td { padding: 6px 0; font-size: 14px; border-bottom: 1px solid #d1dce5; }
+        .spec-label { font-weight: 700; color: #507084; width: 120px; }
+        .spec-value { color: #173f5e; }
+        
+        .security-note { font-size: 13px; color: #c53b30; font-weight: 700; margin-top: 10px; display: flex; align-items: center; }
+        .security-note i { margin-right: 6px; }
+
+        .streaming { border-color: #2d9079; }
+        .training { border-color: #7456a0; }
+        .inference { border-color: #c88d17; }
+        .governance { border-color: #455764; }
+
+        .footer { position: absolute; bottom: 30px; left: 70px; right: 70px; border-top: 1px solid #d5dfe6; padding-top: 15px; font-size: 12px; color: #8497a3; display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="eyebrow">Cross-Cutting · Infrastructure Substrate</div>
+        <h1 class="title">Kubernetes Separates Streaming, Training, and Review</h1>
+        
+        <div class="deploy-grid">
+            <div class="deploy-block streaming">
+                <h3>Flink Application Mode</h3>
+                <table class="spec-table">
+                    <tr><td class="spec-label">Workload</td><td class="spec-value">Isolated tenant-domain clusters</td></tr>
+                    <tr><td class="spec-label">Resources</td><td class="spec-value">1 slot per TaskManager (policy-critical)</td></tr>
+                    <tr><td class="spec-label">State</td><td class="spec-value">RocksDB + S3 Checkpoints/Savepoints</td></tr>
+                </table>
+                <div class="security-note"><i class="fas fa-shield-alt"></i> Exactly-once semantics for claims integrity</div>
+            </div>
+
+            <div class="deploy-block training">
+                <h3>Ray CPU/GPU Training</h3>
+                <table class="spec-table">
+                    <tr><td class="spec-label">Workload</td><td class="spec-value">Ephemeral RayJobs for GNN/LLM</td></tr>
+                    <tr><td class="spec-label">Resources</td><td class="spec-value">Dedicated GPU node pools (tainted)</td></tr>
+                    <tr><td class="spec-label">Scaling</td><td class="spec-value">KubeRay logical-resource autoscaler</td></tr>
+                </table>
+                <div class="security-note"><i class="fas fa-shield-alt"></i> Point-in-time snapshot isolation</div>
+            </div>
+
+            <div class="deploy-block inference">
+                <h3>Healthcare AI Inference</h3>
+                <table class="spec-table">
+                    <tr><td class="spec-label">Workload</td><td class="spec-value">Clinical Evidence & GNN Gateways</td></tr>
+                    <tr><td class="spec-label">Resources</td><td class="spec-value">Non-root, read-only root filesystem</td></tr>
+                    <tr><td class="spec-label">Egress</td><td class="spec-value">Financial services denied by policy</td></tr>
+                </table>
+                <div class="security-note"><i class="fas fa-shield-alt"></i> PHI logging disabled; seccomp enabled</div>
+            </div>
+
+            <div class="deploy-block governance">
+                <h3>Governance & Audit</h3>
+                <table class="spec-table">
+                    <tr><td class="spec-label">Workload</td><td class="spec-value">MLflow, Temporal, Keycloak, APISIX</td></tr>
+                    <tr><td class="spec-label">Identity</td><td class="spec-value">OIDC tokens with Purpose of Use</td></tr>
+                    <tr><td class="spec-label">Audit</td><td class="spec-value">Immutable ledger of model versions</td></tr>
+                </table>
+                <div class="security-note"><i class="fas fa-shield-alt"></i> Enforced human-in-the-loop disposition</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span>CRUSH · KUBERNETES DEPLOYMENT BLUEPRINT</span>
+            <span>09</span>
+        </div>
+    </div>
+</body>
+</html>

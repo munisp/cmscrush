@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crush.example.invalid/schemas/gnn-assessment.v1.json",
+  "title": "CRUSH GNN Assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["assessment_id", "tenant_id", "jurisdiction", "subject", "model", "graph_snapshot_id", "features", "result", "evidence", "created_at"],
+  "properties": {
+    "assessment_id": {"type": "string", "pattern": "^[a-zA-Z0-9._:-]{8,160}$"},
+    "tenant_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "jurisdiction": {"type": "string", "minLength": 1, "maxLength": 64},
+    "subject": {"type": "object", "additionalProperties": false, "required": ["type", "id"], "properties": {"type": {"type": "string", "enum": ["provider", "organization", "claim", "supplier", "broker", "lab"]}, "id": {"type": "string"}}},
+    "model": {"type": "object", "additionalProperties": false, "required": ["name", "version", "framework", "calibration_version"], "properties": {"name": {"type": "string"}, "version": {"type": "string"}, "framework": {"type": "string", "enum": ["pytorch-geometric", "dgl"]}, "calibration_version": {"type": "string"}}},
+    "graph_snapshot_id": {"type": "string"},
+    "features": {"type": "object", "additionalProperties": false, "required": ["feature_set_version", "as_of_time", "freshness_seconds"], "properties": {"feature_set_version": {"type": "string"}, "as_of_time": {"type": "string", "format": "date-time"}, "freshness_seconds": {"type": "integer", "minimum": 0}, "missingness_flags": {"type": "array", "items": {"type": "string"}}}},
+    "result": {"type": "object", "additionalProperties": false, "required": ["score", "abstained", "abstain_reason", "top_subgraph_refs"], "properties": {"score": {"type": "number", "minimum": 0, "maximum": 1}, "lower_bound": {"type": "number", "minimum": 0, "maximum": 1}, "upper_bound": {"type": "number", "minimum": 0, "maximum": 1}, "abstained": {"type": "boolean"}, "abstain_reason": {"type": ["string", "null"]}, "top_subgraph_refs": {"type": "array", "maxItems": 20, "items": {"type": "string"}}}},
+    "evidence": {"type": "array", "maxItems": 50, "items": {"type": "object", "additionalProperties": false, "required": ["ref", "kind", "source_event_ids"], "properties": {"ref": {"type": "string"}, "kind": {"type": "string", "enum": ["graph_edge", "graph_node", "feature", "claim", "enrollment", "document"]}, "source_event_ids": {"type": "array", "items": {"type": "string"}}}}},
+    "created_at": {"type": "string", "format": "date-time"}
+  }
+}
