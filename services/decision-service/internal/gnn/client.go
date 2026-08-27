@@ -48,6 +48,7 @@ type Request struct {
 type Client struct {
 	baseURL string
 	http    *http.Client
+	breaker *CircuitBreaker
 }
 
 func NewClient(baseURL string, timeout time.Duration) (*Client, error) {
@@ -57,7 +58,11 @@ func NewClient(baseURL string, timeout time.Duration) (*Client, error) {
 	if timeout <= 0 || timeout > 2*time.Second {
 		return nil, errors.New("gnn timeout must be greater than zero and no more than two seconds")
 	}
-	return &Client{baseURL: strings.TrimRight(baseURL, "/"), http: &http.Client{Timeout: timeout}}, nil
+	return &Client{
+		baseURL: strings.TrimRight(baseURL, "/"),
+		http:    &http.Client{Timeout: timeout},
+		breaker: NewCircuitBreaker(3, 5*time.Second),
+	}, nil
 }
 
 func (c *Client) Assess(ctx context.Context, req Request, gatewayTenant, traceID string) (Assessment, error) {
@@ -67,34 +72,42 @@ func (c *Client) Assess(ctx context.Context, req Request, gatewayTenant, traceID
 	if req.SubjectType == "" || req.SubjectID == "" || req.GraphSnapshotID == "" || req.FeatureSet == "" {
 		return Assessment{}, errors.New("incomplete gnn assessment request")
 	}
+	if err := c.breaker.Allow(time.Now().UTC()); err != nil {
+		return Assessment{}, err
+	}
+	fail := func(err error) (Assessment, error) {
+		c.breaker.RecordFailure(time.Now().UTC())
+		return Assessment{}, err
+	}
 	body, err := json.Marshal(req)
 	if err != nil {
-		return Assessment{}, fmt.Errorf("marshal gnn request: %w", err)
+		return fail(fmt.Errorf("marshal gnn request: %w", err))
 	}
 	httpReq, err := http.NewRequestWithContext(ctx, http.MethodPost, c.baseURL+"/v1/assessments", strings.NewReader(string(body)))
 	if err != nil {
-		return Assessment{}, fmt.Errorf("build gnn request: %w", err)
+		return fail(fmt.Errorf("build gnn request: %w", err))
 	}
 	httpReq.Header.Set("Content-Type", "application/json")
 	httpReq.Header.Set("X-Tenant-ID", gatewayTenant)
 	httpReq.Header.Set("X-Trace-ID", traceID)
 	resp, err := c.http.Do(httpReq)
 	if err != nil {
-		return Assessment{}, fmt.Errorf("gnn assessment unavailable: %w", err)
+		return fail(fmt.Errorf("gnn assessment unavailable: %w", err))
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
-		return Assessment{}, fmt.Errorf("gnn assessment returned status %d", resp.StatusCode)
+		return fail(fmt.Errorf("gnn assessment returned status %d", resp.StatusCode))
 	}
 	var assessment Assessment
 	if err := json.NewDecoder(resp.Body).Decode(&assessment); err != nil {
-		return Assessment{}, fmt.Errorf("decode gnn assessment: %w", err)
+		return fail(fmt.Errorf("decode gnn assessment: %w", err))
 	}
 	if assessment.TenantID != gatewayTenant || assessment.GraphSnapshotID != req.GraphSnapshotID {
-		return Assessment{}, errors.New("gnn response context mismatch")
+		return fail(errors.New("gnn response context mismatch"))
 	}
 	if assessment.Score < 0 || assessment.Score > 1 || assessment.LowerBound < 0 || assessment.UpperBound > 1 {
-		return Assessment{}, errors.New("gnn response score out of range")
+		return fail(errors.New("gnn response score out of range"))
 	}
+	c.breaker.RecordSuccess()
 	return assessment, nil
 }

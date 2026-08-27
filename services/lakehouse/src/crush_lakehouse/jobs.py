@@ -8,11 +8,24 @@ from __future__ import annotations
 
 from typing import Any, Iterable, Mapping
 
-from .core import LakehousePath, assert_log_safe, event_partition, haversine_feature, stable_event_hash
+from .core import (
+    LakehousePath,
+    assert_log_safe,
+    event_partition,
+    haversine_feature,
+    stable_event_hash,
+    validate_bronze_event,
+)
 
 
 def bronze_claim_row(event: Mapping[str, Any]) -> dict[str, Any]:
-    """Create the Bronze metadata row; raw payload storage belongs in object-locked storage."""
+    """Create a Bronze metadata row with non-PHI contract status.
+
+    Raw payload storage belongs in object-locked storage. Contract failures are
+    retained as metadata for quarantine/replay workflows rather than silently
+    dropping unknown fields.
+    """
+    validation = validate_bronze_event(event)
     path = event_partition(event)
     return {
         "tenant_id": event["tenant_id"],
@@ -25,6 +38,10 @@ def bronze_claim_row(event: Mapping[str, Any]) -> dict[str, Any]:
         "event_hash": stable_event_hash(event),
         "delta_path": path.uri(),
         "schema_version": event["schema_version"],
+        "schema_fingerprint": validation.schema_fingerprint,
+        "validation_status": validation.status,
+        "validation_errors": list(validation.errors),
+        "unexpected_fields": list(validation.unexpected_fields),
     }
 
 

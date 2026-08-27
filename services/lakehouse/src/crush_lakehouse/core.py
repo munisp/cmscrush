@@ -98,3 +98,47 @@ def required_string(event: Mapping[str, Any], field: str) -> str:
     if not isinstance(value, str) or not value.strip():
         raise ValueError(f"{field} is required")
     return value
+
+
+BRONZE_REQUIRED_FIELDS = frozenset({
+    "event_id", "tenant_id", "program", "source_system", "source_message_id",
+    "received_at", "raw_ref", "schema_version",
+})
+BRONZE_ALLOWED_FIELDS = BRONZE_REQUIRED_FIELDS | frozenset({"occurred_at", "purpose_of_use", "data_class"})
+
+
+@dataclass(frozen=True)
+class SchemaValidation:
+    status: str
+    schema_fingerprint: str
+    errors: tuple[str, ...] = ()
+    unexpected_fields: tuple[str, ...] = ()
+
+
+def schema_fingerprint(fields: Iterable[str]) -> str:
+    """Create a stable contract fingerprint for drift metrics and replay audits."""
+    canonical = "|".join(sorted(set(fields))).encode("utf-8")
+    return f"sha256:{sha256(canonical).hexdigest()}"
+
+
+def validate_bronze_event(event: Mapping[str, Any]) -> SchemaValidation:
+    """Validate the source envelope before Bronze-to-Silver promotion.
+
+    Unknown fields are classified as drift rather than dropped. Required-field and
+    type failures are quarantined. The raw event remains available for replay in
+    object storage; this function never logs or returns its payload.
+    """
+    fields = set(event.keys())
+    missing = sorted(BRONZE_REQUIRED_FIELDS - fields)
+    unexpected = tuple(sorted(fields - BRONZE_ALLOWED_FIELDS))
+    errors = [f"missing:{field}" for field in missing]
+    for field in ("event_id", "tenant_id", "program", "source_system", "source_message_id", "received_at", "raw_ref", "schema_version"):
+        if field in event and (not isinstance(event[field], str) or not str(event[field]).strip()):
+            errors.append(f"invalid:{field}")
+    if errors:
+        status = "QUARANTINED"
+    elif unexpected:
+        status = "DRIFT_DETECTED"
+    else:
+        status = "VALID"
+    return SchemaValidation(status, schema_fingerprint(fields), tuple(sorted(errors)), unexpected)

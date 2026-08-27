@@ -1,0 +1,558 @@
+                                                                        Federal Register / Vol. 91, No. 39 / Friday, February 27, 2026 / Proposed Rules                                          9803
+
+                                                A. Executive Order 12866: Regulatory                    H. Executive Order 13045: Protection of               DATES: To be assured consideration,
+                                                Planning and Review and Executive                       Children From Environmental Health                    comments must be received at one of
+                                                Order 13563: Improving Regulation and                   Risks and Safety Risks                                the addresses provided below, by March
+                                                Regulatory Review                                          The EPA interprets Executive Order                 30, 2026.
+                                                                                                        13045 as applying only to those                       FOR FURTHER INFORMATION CONTACT:
+                                                  This action is not a significant                                                                            Kathleen O’Malley, (410) 786–8987.
+                                                regulatory action and was therefore not                 regulatory actions that concern
+                                                                                                        environmental health or safety risks that             ADDRESSES: In commenting, refer to file
+                                                submitted to the Office of Management
+                                                and Budget (OMB) for review. This                       the EPA has reason to believe may                     code CMS–6098–NC.
+                                                action proposes to issue a CDD for the                  disproportionately affect children, per                 Comments, including mass comment
+                                                Cleveland area for the 2015 ozone                       the definition of ‘‘covered regulatory                submissions, must be submitted in one
+                                                NAAQS.                                                  action’’ in section 2–202 of the                      of the following three ways (please
+                                                                                                        Executive Order. Therefore, this action               choose only one of the ways listed):
+                                                B. Executive Order 14192: Unleashing                    is not subject to Executive Order 13045                 1. Electronically. You may submit
+                                                Prosperity Through Deregulation                         because it merely proposes a CDD.                     electronic comments on this regulation
+                                                                                                                                                              to http://www.regulations.gov. Follow
+                                                  Executive Order 14192 does not apply                  I. Executive Order 13211: Actions That                the ‘‘Submit a comment’’ instructions.
+                                                because it is not a significant regulatory              Significantly Affect Energy Supply,                     2. By regular mail. You may mail
+                                                action and is therefore exempted from                   Distribution, or Use                                  written comments to the following
+                                                review under Executive Order 12866.                       This action is not subject to Executive             address ONLY: Centers for Medicare &
+                                                C. Paperwork Reduction Act (PRA)                        Order 13211, because it is not a                      Medicaid Services, Department of
+                                                                                                        significant regulatory action under                   Health and Human Services, Attention:
+                                                  This rule does not impose an                          Executive Order 12866.                                CMS–6098–NC, P.O. Box 8013,
+                                                information collection burden under the                                                                       Baltimore, MD 21244–8013.
+                                                provisions of the Paperwork Reduction                   List of Subjects in 40 CFR Part 52                      Please allow sufficient time for mailed
+                                                Act of 1995 (44 U.S.C. 3501 et seq.)                      Environmental protection, Air                       comments to be received before the
+                                                                                                        pollution control, Incorporation by                   close of the comment period.
+                                                D. Regulatory Flexibility Act (RFA)                     reference, Intergovernmental relations,                 3. By express or overnight mail. You
+                                                   I certify that this action will not have             Nitrogen oxides, Ozone, Reporting and                 may send written comments to the
+                                                a significant economic impact on a                      recordkeeping requirements, Volatile                  following address ONLY: Centers for
+                                                substantial number of small entities                    organic compounds.                                    Medicare & Medicaid Services,
+                                                under the RFA. This action will not                       Dated: February 17, 2026.                           Department of Health and Human
+                                                impose any requirements on small                                                                              Services, Attention: CMS–6098–NC,
+                                                                                                        Anne Vogel,
+                                                entities beyond those imposed by state                                                                        Mail Stop C4–26–05, 7500 Security
+                                                                                                        Regional Administrator, Region 5.
+                                                law. The proposed CDD does not create                                                                         Boulevard, Baltimore, MD 21244–1850.
+                                                                                                        [FR Doc. 2026–03934 Filed 2–26–26; 8:45 am]             [Note: This ZIP code is for express
+                                                any new requirements and does not
+                                                directly regulate any entities.
+                                                                                                        BILLING CODE 6560–50–P                                mail or courier delivery only. This ZIP
+                                                                                                                                                              code specifies the agency’s physical
+                                                E. Unfunded Mandates Reform Act                                                                               location.]
+                                                (UMRA)                                                  DEPARTMENT OF HEALTH AND                                For information on viewing public
+                                                                                                        HUMAN SERVICES                                        comments, see the beginning of the
+                                                  This action does not contain any                                                                            SUPPLEMENTARY INFORMATION section.
+                                                unfunded mandate as described in                        Centers for Medicare & Medicaid                       SUPPLEMENTARY INFORMATION:
+                                                UMRA, 2 U.S.C. 1531–1538, and does                      Services                                                Inspection of Public Comments: All
+                                                not significantly or uniquely affect small
+                                                                                                                                                              comments received before the close of
+                                                governments. This action imposes no                     42 CFR Part 424                                       the comment period are available for
+                                                enforceable duty on any state, local or
+                                                                                                        [CMS–6098–NC]                                         viewing by the public, including any
+                                                Tribal governments or the private sector.
+                                                                                                                                                              personally identifiable or confidential
+                                                F. Executive Order 13132: Federalism                    RIN 0938–AV97                                         business information that is included in
+                                                                                                                                                              a comment. We post all comments
+                                                  This action does not have federalism                  Request for Information (RFI) Related
+                                                                                                                                                              received before the close of the
+                                                implications. It will not have substantial              to Comprehensive Regulations To
+                                                                                                                                                              comment period on the following
+                                                direct effects on the states, on the                    Uncover Suspicious Healthcare
+                                                                                                                                                              website as soon as possible after they
+                                                relationship between the national                       (CRUSH)
+                                                                                                                                                              have been received: http://
+                                                government and the states, or on the                    AGENCY: Centers for Medicare &                        www.regulations.gov. Follow the search
+                                                distribution of power and                               Medicaid Services (CMS), Department                   instructions on that website to view
+                                                responsibilities among the various                      of Health and Human Services (HHS).                   public comments. CMS will not post on
+                                                levels of government. This action                                                                             Regulations.gov public comments that
+                                                                                                        ACTION: Request for information.
+                                                proposes a CDD for the Cleveland                                                                              make threats to individuals or
+                                                nonattainment area under the CAA.                       SUMMARY: This request for information                 institutions or suggest that the
+                                                G. Executive Order 13175: Coordination                  (RFI) solicits stakeholder feedback on                commenter will take actions to harm an
+lotter on DSK8BHNXB4PROD with PROPOSALS1
+
+
+
+
+                                                With Indian Tribal Governments                          potential regulatory changes that might               individual. CMS continues to encourage
+                                                                                                        be included in a potential upcoming                   individuals not to submit duplicative
+                                                  This rule does not have Tribal                        CRUSH proposed rule, as well as other                 comments. We will post acceptable
+                                                implications, as specified in Executive                 programmatic changes that could be                    comments from multiple unique
+                                                Order 13175. It will not have substantial               implemented to make CMS more                          commenters even if the content is
+                                                direct effects on Tribal governments.                   effective in crushing fraud to protect                identical or nearly identical to other
+                                                Thus, Executive Order 13175 does not                    taxpayer dollars and the Americans we                 comments. CMS encourages
+                                                apply to this rule.                                     serve.                                                commenters to include supporting facts,
+
+
+                                           VerDate Sep<11>2014   17:06 Feb 26, 2026   Jkt 268001   PO 00000   Frm 00072   Fmt 4702   Sfmt 4702   E:\FR\FM\27FEP1.SGM   27FEP1
+                                                9804                    Federal Register / Vol. 91, No. 39 / Friday, February 27, 2026 / Proposed Rules
+
+                                                research, and evidence in their                         its fraud-fighting toolbox and invites                   • CMS currently does not have an
+                                                comments. When doing so, commenters                     public comments on how to achieve                     affirmative, regulatory authority to
+                                                are encouraged to provide citations to                  this. Specifically, we seek comments on               direct Medicare Advantage (MA)
+                                                the materials referenced, including                     the following questions and related                   organizations and Part D plan sponsors
+                                                active hyperlinks. Likewise,                            topics around CMS’ existing program                   to suspend payments to providers and
+                                                commenters who reference materials                      integrity authorities and processes:                  suppliers that operate exclusively in
+                                                that have not been published are                           • Are there ways in which CMS could                Part C or Part D or both. Should CMS
+                                                encouraged to upload relevant data                      better use existing statutory authorities             establish regulatory requirements that
+                                                collection instruments, data sets, and                  to expeditiously prevent bad actors from              allow MA organizations and Part D
+                                                detailed findings as a part of their                    engaging in fraud, waste, and abuse?                  sponsors to implement payment
+                                                comment. Providing such citations and                      • Are there ways to modify provider                suspensions under circumstances
+                                                documentation will assist CMS in                        enrollment (including revocation),                    similar to the payment suspension
+                                                analyzing the comments.                                 medical review, investigation, audit,                 authority that exists for Traditional
+                                                I. Background                                           payment suspension, and other program                 Medicare under 42 CFR 405.371, and
+                                                                                                        integrity oversight policies to provide               require suspensions when directed by
+                                                   On June 6, 2025, President Trump                     CMS with increased authority and                      CMS?
+                                                issued a Presidential Memorandum on                     flexibility to expeditiously prevent bad
+                                                Eliminating Waste, Fraud, and Abuse in                                                                        B. Enhanced Identity Proofing and
+                                                                                                        actors from engaging in fraud, waste,
+                                                Medicaid expressing this                                                                                      Ownership Requirements
+                                                                                                        and abuse? (See, for example, Title 42
+                                                Administration’s commitment to                          Code of Federal Regulations (CFR)                        CMS has identified significant
+                                                preserve and protect the integrity of                   405.371 et seq. (payment suspension),                 concerns that Medicare fraud is
+                                                government programs. Similarly,                         part 424, Subpart P, especially 424.510               increasingly perpetrated through
+                                                President Trump, U.S. Department of                     (general requirements), 424.516                       international fraud schemes
+                                                Health and Human Services (HHS)                         (additional requirements), 424.530                    characterized by opacity of ownership
+                                                Secretary Kennedy, and Centers for                      (enrollment denial), 424.535                          structures. These schemes often involve
+                                                Medicare & Medicaid Services (CMS)                      (revocation), and 424.540 (deactivation               owners who reside outside of the United
+                                                Administrator Oz have strongly                          of billing privileges).)                              States, owners who are not permanent
+                                                demonstrated this administration’s
+                                                                                                           • Are there existing requirements or               residents or U.S. citizens, and
+                                                dedication to crushing fraud in                                                                               individuals who operate beyond the
+                                                                                                        policies, including those issued through
+                                                Medicare, Medicaid, the Children’s                                                                            reach of U.S. law enforcement
+                                                                                                        regulations, memoranda, administrative
+                                                Health Insurance Program (CHIP), and                                                                          authorities. The lack of robust identity
+                                                                                                        orders, subregulatory guidance
+                                                the Marketplace. In alignment with this                                                                       verification and the ability of non-U.S.
+                                                                                                        documents, or policy statements that
+                                                strategic objective, CMS is issuing this                                                                      residents to maintain ownership in
+                                                                                                        could be altered to increase CMS’ ability
+                                                RFI to solicit stakeholder feedback on                                                                        Medicare-enrolled entities creates
+                                                                                                        to promote payment accuracy and
+                                                potential regulatory changes that might                                                                       substantial program integrity
+                                                                                                        efficiency to protect the integrity of
+                                                be included in a potential future                                                                             vulnerabilities and impedes fraud
+                                                                                                        Medicare, Medicaid, CHIP, and the
+                                                proposed rule, as well as other
+                                                                                                        Health Insurance Marketplace®? 1                      investigation and prosecution efforts.
+                                                programmatic changes that could be
+                                                                                                           • What changes could CMS or its                    CMS is seeking stakeholder feedback on
+                                                implemented to make CMS more                                                                                  potential provisions that would require
+                                                                                                        contractors make to existing processes
+                                                effective in crushing fraud to protect                                                                        enhanced identity proofing of
+                                                                                                        to promote their ability to effectively
+                                                taxpayer dollars and the Americans we                                                                         individuals associated with Medicare-
+                                                                                                        deter fraud, waste, and abuse and
+                                                serve.                                                                                                        enrolled entities and impose citizenship
+                                                                                                        promote payment accuracy and
+                                                II. Solicitation of Public Comments                     efficiency, including by more                         or legal residency requirements for
+                                                   While CMS invites all relevant input,                expeditiously gathering actionable                    ownership.
+                                                we are specifically inviting responses on               information?                                             • What would be the impact on
+                                                the following topics listed in this                        • What types of analytics,                         Medicare-enrolled entities if CMS
+                                                section of this RFI. This RFI does not                  methodologies, or data-driven                         established a requirement for U.S.
+                                                necessarily solicit comments on the full                approaches would be most effective in                 citizenship or legal permanent
+                                                scope of topics that could be included                  identifying indicators of potential fraud,            residency for all individuals with an
+                                                in a potential, future CRUSH Rule.                      waste, or abuse? We welcome feedback                  ownership or control interest of 5
+                                                                                                        on specific analytical techniques,                    percent or greater in a Medicare-
+                                                A. Modifications to Program Integrity                   models, technologies, mechanisms, or                  enrolled provider or supplier?
+                                                Requirements                                            data sources that could strengthen our                   • CMS currently requires
+                                                  CMS takes a variety of actions to                     ability to proactively detect and prevent             fingerprinting and criminal background
+                                                crush fraud, waste and abuse, including                 fraudulent activity.                                  checks for all individuals with a 5
+                                                provider enrollment screening,                             • A core component of crushing fraud               percent or greater ownership interest in
+                                                suspending payments when there is a                     to protect taxpayer dollars is                        a provider/supplier organization that is
+                                                credible allegation of fraud or reliable                transparency to the Americans we serve                part of the ‘‘high’’ risk category as
+                                                indication of overpayment, data                         about CMS’ program integrity                          described in 42 CFR 424.518. Should
+                                                analytics of claims, imposing automatic                 undertakings. How can CMS improve its                 this be expanded to include, for
+                                                                                                        transparency about its oversight and                  instance, the provider’s managing
+lotter on DSK8BHNXB4PROD with PROPOSALS1
+
+
+
+
+                                                pre-payment claims edits, conducting
+                                                investigations and audits, post-payment                 enforcement activities?                               employees, less than 5 percent owners,
+                                                review of medical records, revocations,                                                                       or other individuals who are affiliated
+                                                re-enrollment bans, coordinating with                      1 Health Insurance Marketplace® is a registered    with or working for the organization?
+                                                law enforcement partners on                             service mark of the U.S. Department of Health &          • What alternative identity proofing
+                                                                                                        Human Services. The Health Insurance
+                                                enforcement actions, and providing                      Marketplace® is also known as the Federally
+                                                                                                                                                              measures could effectively verify the
+                                                education to reduce improper payments.                  facilitated Exchange, which we use synonymously       identity and location of owners while
+                                                CMS is looking for ways to strengthen                   later in this document.                               balancing program integrity objectives
+
+
+                                           VerDate Sep<11>2014   17:06 Feb 26, 2026   Jkt 268001   PO 00000   Frm 00073   Fmt 4702   Sfmt 4702   E:\FR\FM\27FEP1.SGM   27FEP1
+                                                                        Federal Register / Vol. 91, No. 39 / Friday, February 27, 2026 / Proposed Rules                                                   9805
+
+                                                with the operational needs of legitimate                  • Are there alternative mechanisms                  genetic tests and molecular diagnostic
+                                                Medicare providers and suppliers?                       that could achieve similar program                    tests?
+                                                   • Are there specific provider or                     integrity objectives without requiring                   • What types of tools, data analytics,
+                                                supplier types for which enhanced                       enrollment in Traditional Medicare?                   and methods would assist CMS to
+                                                identity proofing and citizenship or                                                                          increase program integrity related to lab
+                                                residency requirements would be most                    D. Reducing Medicare Fraud Related to                 tests, including genetic tests and
+                                                critical to preventing fraud?                           Laboratory Tests Including Genetic                    molecular diagnostic tests?
+                                                   • Are there additional individuals on                Tests and Molecular Diagnostic Tests                     In 2011, the Molecular Diagnostic
+                                                the enrollment record for whom                             In 2024, Medicare Part B or                        Services Program (MolDX Program),
+                                                enhanced identity proofing and                          Traditional Medicare spending on                      administered by Palmetto GBA on
+                                                citizenship or residency requirements                   clinical diagnostic laboratory tests (lab             behalf of CMS, was established to
+                                                would help prevent fraud?                               tests) totaled $8.4 billion—a five percent            determine and streamline coverage and
+                                                   • What challenges would these                        increase over the previous year per a                 reimbursement for molecular diagnostic
+                                                requirements create for entities with                   January 2026 U.S. Department of Health                tests on behalf of the Medicare program.
+                                                foreign parent companies, international                 and Human Services’ Office of the                     It aims to provide uniform policies
+                                                investors, or legitimate cross-border                   Inspector General (OIG) Report.2 Part B               across multiple Medicare
+                                                business structures?                                    spending on lab tests has been shifting               Administrative Contractors (MACs) and
+                                                                                                        increasingly toward genetic tests,                    currently spans 28 states.
+                                                C. Preclusion List and Medicare                                                                                  CMS is interested in understanding if
+                                                Advantage Enrollment Requirements                       including tests related to cancer,
+                                                                                                        infections, and epilepsy.3 Although                   a requirement to register in the MolDX
+                                                  CMS has identified significant deficits               genetic tests represented only 5 percent              program, that other payors may have,
+                                                in the effectiveness of the preclusion list             of lab tests paid under Part B in 2024,               has had an impact on the risk of fraud,
+                                                in preventing fraudulent billing in MA.                 they accounted for 43 percent ($3.6                   waste and abuse related to laboratory
+                                                Under current policy, providers and                     billion) of Part B lab spending. The OIG              testing. CMS also wants to understand
+                                                suppliers that are revoked from                         and the Department of Justice have                    the rationale as to why other payors and
+                                                Traditional Medicare for reasons not                    issued multiple reports 4 and fraud                   MA organizations require laboratories to
+                                                considered ‘‘detrimental to the best                    alerts,5 and have engaged in multiple                 be registered in MolDX even when they
+                                                interests of the Medicare program’’ are                 enforcement actions 6 related to fraud in             are not located in a MolDX state.
+                                                not included on the preclusion list.                    lab tests, particularly genetic tests,                   • What prompted other payors and
+                                                CMS has observed that providers and                     including molecular diagnostic tests.                 MA organizations to require registration
+                                                suppliers revoked from Traditional                      CMS is concerned about fraud, waste,                  in the MolDX program?
+                                                Medicare for these reasons often shift                  and abuse related to lab tests and has                   • What safeguards or challenges has
+                                                their billing operations to MA plans,                   targeted this as a focus area through its             the MolDX program provided to your
+                                                where they can continue to submit                       Fraud Defense Operations Center                       organization regarding laboratory
+                                                claims and receive payment. This gap in                 (FDOC), which is a high-tech unit                     testing?
+                                                the preclusion list undermines program                  formed in 2025 that utilizes cross-                   E. Reducing Risks From Non-
+                                                integrity efforts and allows bad actors to              functional teams to target fraud in real              Participating Durable Medicare
+                                                circumvent CMS oversight. CMS is                        time and has expedited the issuance of                Equipment, Prosthetics, Orthotics and
+                                                seeking feedback from MA organizations                  payment suspensions, resulting in $1.8                Supplies (DMEPOS) 7 Suppliers in
+                                                and other stakeholders on potential                     billion in taxpayer savings in 2025, over             Medicare Advantage
+                                                improvements to the preclusion list and                 $100 million of which was related to
+                                                whether requiring enrollment in                                                                                  There is a significant risk of fraud,
+                                                                                                        suspect laboratories.                                 waste, and abuse with certain high-risk
+                                                Traditional Medicare could enhance                         • What new statutory or regulatory
+                                                program integrity.                                                                                            services, including the provision of
+                                                                                                        authorities would empower CMS to
+                                                  • What changes could CMS make to                      more effectively prevent, identify, and
+                                                                                                                                                              DMEPOS. The OIG and MA
+                                                better effectuate the preclusion list to                                                                      organizations have identified that non-
+                                                                                                        address fraud in lab tests, including                 participating DMEPOS suppliers 8 are
+                                                prevent Traditional Medicare-revoked
+                                                providers and suppliers from continuing                   2 Total Medicare Part B Spending on Lab Tests
+                                                                                                                                                              fraudulently billing MA plans for
+                                                to bill MA plans?                                       Rose in 2024, Driven by Increased Spending on         millions of dollars of services not
+                                                  • Does the current preclusion list                    Genetic Tests. OIG Report Number OEI–09–25–           rendered and not needed.9 We would
+                                                adequately serve the needs of MA                        00330. January 23, 2026. Available at: https://
+                                                                                                        oig.hhs.gov/reports/all/2026/total-medicare-part-b-     7 Examples of DMEPOS include: mobility aids
+                                                organizations in identifying and                        spending-on-lab-tests-rose-in-2024-driven-by-         (wheelchairs, walkers, canes, scooters), respiratory
+                                                preventing payments to providers and                    increased-spending-on-genetic-tests/.                 aids (oxygen, CPAP machines, ventilators), hospital
+                                                suppliers that pose fraud, waste, or                      3 Id.
+                                                                                                                                                              beds, prosthetic limbs/eyes, orthopedic braces,
+                                                abuse risks?                                              4 Id. See also: OIG Semiannual Report to            diabetes supplies (meters, strips, lancets), ostomy
+                                                  • Would MA plans support a                            Congress. October 1, 2024 to March 31, 2025.          supplies (bags, pouches), and infusion pumps, that
+                                                requirement for all providers and                         5 Fraud Alert: Genetic Testing Scam. Last updated   serve recurring medical needs at home.
+                                                                                                        September 27, 2019. Available at: https://              8 Medicare ‘‘participation’’ means that the
+                                                suppliers to enroll in the Traditional                  oig.hhs.gov/fraud/consumer-alerts/fraud-alert-        supplier agrees to accept assignment on all claims
+                                                Medicare (Fee-for-Service) program as a                 genetic-testing-scam/.                                for all Medicare-covered services furnished to the
+                                                condition of billing MA plans?                            6 Lab Operator Convicted of $4M Medicare Fraud      supplier’s patients. By accepting assignment, the
+                                                  • Should such a requirement apply                     Scheme. February 25, 2025. Available at: https://     supplier agrees to accept Medicare-allowed
+                                                                                                        oig.hhs.gov/fraud/enforcement/lab-operator-           amounts as payment in full. The supplier cannot
+lotter on DSK8BHNXB4PROD with PROPOSALS1
+
+
+
+
+                                                only to high-risk provider and supplier                                                                       collect more from the patient than the applicable
+                                                                                                        convicted-of-4m-medicare-fraud-scheme/. See also:
+                                                types?                                                  Federal Law Enforcement Action Involving              Medicare deductible and coinsurance or
+                                                  • What operational, administrative,                   Fraudulent Genetic Testing Results in Charges         copayment. See https://www.cms.gov/medicare-
+                                                and financial impacts would a                           Against 35 Individuals Responsible for Over $2.1      participation for more information.
+                                                requirement to enroll in the Traditional                Billion in Losses in One of the Largest Health Care     9 HHS OIG Work Plan for ‘‘Durable Medical
+
+                                                                                                        Fraud Schemes Ever Charged. September 27, 2019.       Equipment Fraud and Safeguards in Medicare,’’
+                                                Medicare program have on providers                      Available at: https://www.justice.gov/archives/opa/   Project Number: OEI–02–24–00310. (‘‘Each year,
+                                                and suppliers that currently only bill                  pr/federal-law-enforcement-action-involving-          Medicare payments for durable medical equipment,
+                                                MA plans?                                               fraudulent-genetic-testing-results-charges-against.                                              Continued
+
+
+
+
+                                           VerDate Sep<11>2014   17:06 Feb 26, 2026   Jkt 268001   PO 00000   Frm 00074   Fmt 4702   Sfmt 4702   E:\FR\FM\27FEP1.SGM   27FEP1
+                                                9806                     Federal Register / Vol. 91, No. 39 / Friday, February 27, 2026 / Proposed Rules
+
+                                                like the public’s feedback on solutions                     • How would a claim filing deadline               solutions be used for compliance
+                                                related to non-participating DMEPOS                      of 90 to 180 calendar days, which is                 oversight?
+                                                suppliers in MA.                                         consistent with private industry norms,                • How could AI be used to increase
+                                                   • What changes would MA                               impact your practice?                                the efficiency and accuracy of hospital
+                                                organizations need to make to existing                      • Are there certain claim or provider             billing?
+                                                processes to promote the ability to                      types for which these deadlines would                H. Beneficiary Solicitation
+                                                effectively deter fraud, waste, and abuse                not be feasible?
+                                                and promote payment accuracy for non-                       • What would be the best way to                      Medicare beneficiaries are often
+                                                participating DMEPOS suppliers?                          implement a shorter claim filing                     subject to unsolicited outreach by
+                                                   • Are there existing requirements                     deadline for certain high-risk items and             unscrupulous individuals seeking to
+                                                (including those issued through                          services? What are the benefits or                   obtain their personally identifiable
+                                                regulations, memoranda, administrative                   drawbacks of imposing a shorter claim                information to submit fraudulent
+                                                orders, guidance documents, contracts,                   filing deadline for all of the following:            Medicare claims. Beneficiaries are
+                                                or policy statements) that could be                         ++ All claims filed by specific high-             sometimes offered free money, items, or
+                                                altered to increase MA organizations’                    risk provider or supplier types (for                 services in exchange for their
+                                                ability to promote payment accuracy                      example DMEPOS suppliers).                           information. There is currently a
+                                                and efficiency to protect the integrity of                  ++ All claims filed for specific high-            prohibition against unsolicited contact
+                                                the program for non-participating                        risk items or services.                              via telephone by DMEPOS suppliers
+                                                DMEPOS suppliers?                                           ++ All claims filed by specific                   (see section 1834(a)(17) of the Social
+                                                   • What types of analytics,                            providers who are high-risk.                         Security Act (the Act) and 42 CFR
+                                                methodologies, or data-driven                               ++ Some other method(s).                          424.57(c)(11)). We are seeking feedback
+                                                approaches are most effective in                            • Would it be beneficial to apply this            from stakeholders about the impact of
+                                                identifying indicators of potential fraud,               standard to all items and services rather            expanding this prohibition to other
+                                                waste, or abuse for non-participating                    than only to high-risk items and services            types of providers and suppliers
+                                                DMEPOS suppliers? We welcome                             to reduce unnecessary administrative                 through legislation and expanding the
+                                                feedback on specific analytical                          complexity?                                          existing DMEPOS regulation to other
+                                                techniques, models, or data sources that                    • Would the current flexibilities in 42           forms of communication, such as email,
+                                                could strengthen MA organizations’                       CFR 424.44 or additional flexibilities for           text message, or social media.
+                                                ability to proactively detect and prevent                a shorter claim filing deadline be                      • What means of communication do
+                                                fraudulent activity.                                     appropriate to support such a change,                Medicare beneficiaries find are being
+                                                   • Would MA organizations prefer                       and if so, what would those flexibilities            used to solicit them for their Medicare
+                                                DMEPOS suppliers to be accredited and                    be?                                                  information? How do beneficiaries
+                                                enrolled similar to Traditional                                                                               respond when they have been contacted
+                                                Medicare, ensuring suppliers meet                        G. Artificial Intelligence in Medicare
+                                                                                                                                                              by an inappropriate direct solicitation?
+                                                                                                         Advantage Coding Oversight and
+                                                minimum supplier standards?                                                                                      • If the prohibition on unsolicited
+                                                                                                         Hospital Billing
+                                                F. Reducing Fraudulent Medicare Parts                                                                         contact via telephone by DMEPOS
+                                                A and B (Traditional Medicare) Claim                        CMS is seeking input from                         suppliers was expanded to other forms
+                                                Submissions                                              stakeholders about the availability, use,            of communication, what obstacles
+                                                                                                         efficacy, and cost of using artificial               would that create for DMEPOS suppliers
+                                                   Due to the significant risk of fraud,                 intelligence (AI), based on machine                  that could hinder your ability to
+                                                waste, and abuse with certain high-risk                  learning and other methods, to assist                effectively serve Medicare beneficiaries?
+                                                items and services (for example,                         with accurately and efficiently                      In what ways could CMS mitigate those
+                                                DMEPOS), CMS is seeking feedback                         abstracting diagnoses from medical                   concerns while still expanding
+                                                about the impact of reducing the                         record documentation as part of a                    protections for beneficiaries?
+                                                Medicare Parts A and B (Traditional                      medical records review. More                            • If CMS were to pursue a legislative
+                                                Medicare) 1-calendar year claim filing                   specifically, CMS is seeking input on                proposal to expand the prohibition
+                                                deadline for high-risk items and                         the following topics:                                against unsolicited contact by DMEPOS
+                                                services, including but not limited to                      • What types of AI solutions                      suppliers to other provider and supplier
+                                                DMEPOS. Ensuring claims are filed                        (including commercial off-the-shelf                  types, are there other provider or
+                                                more promptly will assist CMS in                         (COTS) products) are most effective and              supplier types that should be included?
+                                                evaluating data and reduce the ability of                efficient for assisting human coders                    • In what other ways should CMS
+                                                providers to back-bill for fraudulent                    with large volumes of records?                       expand the prohibition on unsolicited
+                                                claims.                                                     • What key features and learning                  contact via telephone by DMEPOS
+                                                                                                         capabilities should an AI solution                   suppliers? For example, should CMS
+                                                prosthetics, orthotics, and supplies (DMEPOS) top
+                                                more than $7 billion in traditional Medicare alone.
+                                                                                                         include to improve accuracy,                         explicitly prohibit DMEPOS suppliers
+                                                Although CMS has a number of safeguards in place         incorporate coder feedback, and prevent              from collaborating with marketing
+                                                to prevent bad actors from billing DMEPOS in             errors or ‘‘hallucinations’’?                        agencies or other third parties acting on
+                                                Medicare, fraudulent billing for DMEPOS continues           • How should AI-generated coding                  their behalf to perform solicitation?
+                                                to be a major concern. Recent cases demonstrate
+                                                that DMEPOS continues to be a target of fraudulent
+                                                                                                         recommendations be displayed to
+                                                                                                         human reviewers, and what compliance                 I. Beneficiary Contact
+                                                billing and that new schemes have developed.
+                                                OIG’s review will provide information about              risks should be considered and                          CMS encourages Medicare
+lotter on DSK8BHNXB4PROD with PROPOSALS1
+
+
+
+
+                                                current fraud schemes and the safeguards and             mitigated?                                           beneficiaries or their authorized legal
+                                                monitoring that CMS has to prevent fraud, waste,
+                                                and abuse. These findings will result in multiple
+                                                                                                            • What lessons have been learned                  representatives to review their Medicare
+                                                products. The first product will look at billing for     from implementing AI solutions,                      Summary Notices (MSNs) and other
+                                                DMEPOS in Medicare Advantage, specifically by            including pricing structures and use                 CMS-issued materials, such as the
+                                                suppliers that are not enrolled in Medicare fee-for-     within cloud-based IT environments?                  Medicare & You handbook (see page 105
+                                                service.’’) Available at: https://oig.hhs.gov/reports/
+                                                work-plan/browse-work-plan-projects/durable-
+                                                                                                            • Are there AI solutions that address             available at www.medicare.gov/
+                                                medical-equipment-fraud-and-safeguards-in-               coding issues related to overpayments                publications/10050-medicare-and-
+                                                medicare/.                                               and underpayments, and can those AI                  you.pdf) and the CMS website to
+
+
+                                           VerDate Sep<11>2014   17:06 Feb 26, 2026   Jkt 268001   PO 00000   Frm 00075   Fmt 4702   Sfmt 4702   E:\FR\FM\27FEP1.SGM   27FEP1
+                                                                        Federal Register / Vol. 91, No. 39 / Friday, February 27, 2026 / Proposed Rules                                          9807
+
+                                                identify services or items that may be                  K. Medicaid and CHIP                                  related to service areas that have been
+                                                incorrect, unfamiliar, or potentially                      Recently, CMS has taken bold steps to              identified as high risk for fraud in
+                                                fraudulent. These communications                        address significant, systemic Medicaid                certain states, such as the following:
+                                                include instructions on how                             fraud that has been discovered in                        ++ Housing stabilization services.
+                                                beneficiaries can report suspected fraud,               multiple states. CMS is continuously                     ++ Behavioral health services.
+                                                waste, or abuse, including contacting                   refining its oversight actions and                       ++ Personal care assistant (PCA)
+                                                CMS, the MACs, or the OIG. While these                  capabilities to ensure that states are                services.
+                                                existing efforts provide important                      proactive in crushing fraudulent
+                                                information and reporting pathways, we                                                                           ++ Nonemergency medical
+                                                                                                        activities in these programs. We are                  transportation.
+                                                are interested in understanding whether
+                                                                                                        seeking stakeholder feedback on how to                   • How can CMS further enhance the
+                                                additional or alternative communication
+                                                                                                        expand CMS’ regulatory authority to act               Healthcare Fraud Prevention
+                                                methods could further improve
+                                                                                                        expeditiously to prevent, identify, and               Partnership (HFPP) to strengthen fraud
+                                                beneficiary awareness, trust, and ease of
+                                                                                                        address instances of fraud, waste, and                detection within state agencies and law
+                                                reporting. Accordingly, we are exploring
+                                                                                                        abuse in Medicaid and CHIP. We are                    enforcement?
+                                                whether and how other approaches or
+                                                                                                        also soliciting suggestions about cutting-
+                                                tools could be utilized to better support
+                                                                                                        edge technological tools that could be                   • What are the best practices for
+                                                beneficiaries in identifying and                                                                              integrating artificial intelligence with
+                                                                                                        harnessed to advance this work.
+                                                reporting potentially suspicious                                                                              existing technologies to maximize
+                                                                                                           • Is there any way that CMS should
+                                                Traditional Medicare claims.                                                                                  effectiveness?
+                                                   • How would beneficiaries prefer to                  better leverage or expand its statutory or
+                                                be contacted by CMS or its contractors                  regulatory program integrity oversight                L. State-Specific Medicaid and CHIP
+                                                about potentially suspicious claims?                    authority?                                            Questions
+                                                Would they prefer that this contact                        • In order to strengthen program
+                                                                                                        integrity oversight of provider                          • What statutory or regulatory
+                                                occur before or after processing the                                                                          changes are needed to strengthen states’
+                                                claim?                                                  enrollment, should CMS require that
+                                                                                                        states require their high-risk providers              ability to effectively reduce fraud,
+                                                   • What concerns, if any, would                                                                             waste, and abuse in Medicaid and
+                                                beneficiaries have regarding privacy,                   to revalidate more frequently than every
+                                                                                                        5 years, and if so, how frequently?                   CHIP?
+                                                burden, or confusion related to
+                                                prepayment verification outreach? In                       • What tools or technologies can CMS                  • What regulatory or administrative
+                                                what ways could CMS distinguish these                   or states use to enhance program                      changes could CMS make to empower
+                                                communications to make them easy to                     integrity in Medicaid, CHIP managed                   states to—(a) pursue bad actors; and (b)
+                                                identify and to make it clear that they                 care, and fee-for-service programs?                   better coordinate program integrity
+                                                are legitimate and trustworthy                             • What tools or guidance can CMS                   efforts with the federal government, law
+                                                communications and that beneficiaries                   give to states to enhance program                     enforcement, and other states?
+                                                need to take action? What form(s) of                    integrity in the Medicaid and CHIP                       • What data or tools would facilitate
+                                                communication (for example, telephone,                  managed care and fee-for-service                      state program integrity activities?
+                                                mail, secure electronic communication)                  programs?                                                • Would further use of federal
+                                                would beneficiaries find acceptable for                    • What ways can CMS improve the                    databases, such as Do Not Pay (DNP), or
+                                                such verification?                                      prevention, identification, and                       non-federal databases provide states
+                                                   • What could CMS be doing that it is                 resolution of fraud, waste, and abuse                 with more complete information to
+                                                not already doing to make it easier for                 related to non-federal share financing                move further away from a pay-and-
+                                                beneficiaries to report a potentially                   sources, including intergovernmental                  chase model and towards pre-pay
+                                                suspicious claim?                                       transfers (IGT)?                                      review?
+                                                                                                           • How can CMS better prevent,                         • What successful strategies have
+                                                J. Surety Bonds                                         identify, and address Medicaid and                    certain states implemented that others
+                                                   In accordance with section                           CHIP fraud, waste, and abuse in the                   can replicate as best practices?
+                                                1834(a)(16) of the Act (and as codified                 context of individuals who do not have
+                                                                                                                                                                 • What is the best way for states to
+                                                in 42 CFR 424.57(d)), DMEPOS                            satisfactory immigration status for full
+                                                                                                                                                              learn about the most up to date
+                                                suppliers are required to maintain a                    Medicaid or CHIP benefits who are
+                                                                                                                                                              technology or data analytic tools
+                                                surety bond of at least $50,000 in order                accessing services inappropriately?
+                                                                                                                                                              available to effectively reduce fraud,
+                                                to enroll and maintain enrollment in                       • How can CMS better prevent fraud,
+                                                                                                                                                              waste, and abuse in Medicaid and
+                                                Medicare. We request public feedback                    waste, and abuse associated with the
+                                                                                                                                                              CHIP?
+                                                on means of strengthening our existing                  differential payment of public and
+                                                surety bond requirement. We are                         private providers?                                       • How can CMS help states better
+                                                especially interested in suggestions on                    • What data and information should                 prevent, identify, and address fraud,
+                                                how CMS should use its surety bond                      states report to CMS to ensure that                   waste, and abuse related to
+                                                authorities to be more effective in the                 fraud, waste, and abuse is being                      supplemental payments (for example,
+                                                fight against fraud, such as increasing                 identified, investigated, and resolved?               disproportionate share hospital (DSH)
+                                                the required bond amount, expanding                        • What best practices and                          payments) or state directed payments?
+                                                the types of Medicare providers and                     standardized processes should states                     • How can CMS help states better
+                                                suppliers that must maintain a surety                   implement when responding to recovery                 prevent, identify, and address fraud,
+                                                                                                                                                              waste, and abuse in section 1915 waiver
+lotter on DSK8BHNXB4PROD with PROPOSALS1
+
+
+
+
+                                                bond, or taking tougher actions against                 audit contractor (RAC) findings?
+                                                bond companies that are not meeting                        • What data or information should be               programs or section 1115 demonstration
+                                                their obligations when fraud is found. In               made publicly available that would                    programs?
+                                                addition, how can CMS strengthen                        allow for transparency in Medicaid by                    • What incentives could be put in
+                                                surety bond requirements in Medicaid                    states, health plans, and providers?                  place for states to proactively engage in
+                                                and CHIP, for example, with respect to                     • How can CMS help states to better                program integrity efforts, and what new
+                                                Medicaid and CHIP home health                           prevent, identify, and address Medicaid               penalties might be necessary to address
+                                                providers?                                              and CHIP fraud, waste, and abuse                      non-compliance by states?
+
+
+                                           VerDate Sep<11>2014   17:06 Feb 26, 2026   Jkt 268001   PO 00000   Frm 00076   Fmt 4702   Sfmt 4702   E:\FR\FM\27FEP1.SGM   27FEP1
+                                                9808                    Federal Register / Vol. 91, No. 39 / Friday, February 27, 2026 / Proposed Rules
+
+                                                M. Federally Facilitated Exchange (FFE)                   • How could CMS enhance                             Responders are advised that the U.S.
+                                                and State-Based Exchanges (SBEs)                        HealthCare.gov to prevent fraud at the                Government will not pay for any
+                                                   • How could CMS strengthen                           point of enrollment and reduce reliance               information or administrative costs
+                                                program integrity, including fraud                      on post-payment recovery (commonly                    incurred in response to this RFI; all
+                                                prevention and consumer protection, in                  referred to as ‘‘pay-and-chase’’), and                costs associated with responding to this
+                                                both the FFE and SBEs by—(1) better                     how could CMS most effectively                        RFI will be solely at the interested
+                                                leveraging existing regulatory oversight                encourage SBEs to adopt best practices                party’s expense. We note that not
+                                                authority; and (2) identifying areas                    for such fraud prevention within their                responding to this RFI does not
+                                                where additional regulatory authority                   legal and other authority?                            preclude participation in any future
+                                                may be needed?                                            • How could CMS expand its                          procurement, if conducted. It is the
+                                                   • How could CMS improve                              regulatory authority to enhance                       responsibility of the potential
+                                                regulations to strengthen oversight of                  oversight of enhanced direct enrollment               responders to monitor this RFI
+                                                agents, brokers, web-brokers, and direct                (EDE) partners?
+                                                                                                          • How could CMS expand its                          announcement for additional
+                                                enrollment entities including                                                                                 information pertaining to this request.
+                                                compliance standards, training, and                     authority to monitor the activity of
+                                                                                                        agents/brokers on EDE platforms?                      In addition, we note that CMS will not
+                                                fraud prevention in both the FFE and                                                                          respond to questions about the policy
+                                                                                                          • How could CMS better detect and
+                                                SBEs?                                                                                                         issues raised in this RFI.
+                                                   • How could CMS expand its                           mitigate improper dual enrollment in
+                                                regulatory authority to incentivize                     Medicaid/CHIP and subsidized                             We will actively consider all input as
+                                                insurance agencies to thoroughly vet                    Exchange plans?                                       we develop future regulatory proposals
+                                                                                                          • How could CMS leverage advanced                   or future subregulatory policy guidance.
+                                                assigned agents, brokers, and web-
+                                                                                                        technologies, such as AI, to prevent,                 We may or may not choose to contact
+                                                brokers assisting consumers with
+                                                                                                        detect, and address fraud, waste, and                 individual responders. Such
+                                                enrollment in FFE plans and hold
+                                                                                                        abuse in both the FFE and SBEs?                       communications would be for the sole
+                                                agencies accountable for activities
+                                                relating to these individuals?                          III. Collection of Information                        purpose of clarifying statements in the
+                                                   • What specific measures could CMS                   Requirements                                          responders’ written responses.
+                                                implement to better curtail the ability of                 This is an RFI only. In accordance                 Contractor support personnel may be
+                                                fraudulent agents, brokers, and web-                    with the implementing regulations of                  used to review responses to this RFI.
+                                                brokers to enroll or change the                         the Paperwork Reduction Act of 1995                   Responses to this notice are not offers
+                                                enrollment of consumers without their                   (PRA), specifically 5 CFR 1320.3(h)(4),               and cannot be accepted by the
+                                                knowledge or consent?                                   this general solicitation is exempt from              Government to form a binding contract
+                                                   • How can CMS strengthen its                                                                               or issue a grant. Information obtained as
+                                                                                                        the PRA. Facts or opinions submitted in
+                                                enforcement activities to better address                                                                      a result of this RFI may be used by the
+                                                                                                        response to general solicitations of
+                                                fraud, waste, and abuse in the FFE and                                                                        Government for program planning on a
+                                                                                                        comments from the public, published in
+                                                SBEs?                                                                                                         non-attribution basis. Respondents
+                                                   • How could CMS strengthen its                       the Federal Register or other
+                                                                                                        publications, regardless of the form or               should not include any information that
+                                                standards for corrective action and for                                                                       might be considered proprietary or
+                                                suspension or termination of agents’,                   format thereof, provided that no person
+                                                                                                        is required to supply specific                        confidential. This RFI should not be
+                                                brokers’, and web brokers’ Exchange
+                                                                                                        information pertaining to the                         construed as a commitment or
+                                                Agreements 10 and what circumstances
+                                                                                                        commenter, other than that necessary                  authorization to incur cost for which
+                                                should trigger each type of action?
+                                                                                                        for self-identification, as a condition of            reimbursement would be required or
+                                                Should CMS consider additional use of
+                                                civil money penalties? If so, under what                the agency’s full consideration, are not              sought. All submissions become U.S.
+                                                circumstances?                                          generally considered information                      Government property and will not be
+                                                   • How could CMS improve the                          collections and therefore not subject to              returned. In addition, we may publicly
+                                                accuracy, timeliness, fraud prevention,                 the PRA.                                              post the public comments received, or a
+                                                and any other aspects related to program                   This RFI is issued solely for                      summary of those public comments.
+                                                integrity in income verification for FFE                information and planning purposes; it
+                                                                                                                                                                Mehmet Oz, Administrator of the Centers
+                                                enrollees?                                              does not constitute a Request for
+                                                                                                                                                              for Medicare & Medicaid Services, approved
+                                                   • What successful anti-fraud                         Proposal (RFP), applications, proposal                this document on February 20, 2026.
+                                                measures already implemented in SBEs                    abstracts, or quotations. This RFI does
+                                                                                                        not commit the U.S. Government to                     Robert F. Kennedy, Jr.,
+                                                should be adopted in the FFE and vice
+                                                                                                        contract for any supplies or services or              Secretary, Department of Health and Human
+                                                versa?
+                                                                                                        make a grant award. Further, we are not               Services.
+                                                 10 Exchange Agreements are also called                 seeking proposals through this RFI and                [FR Doc. 2026–03968 Filed 2–25–26; 4:15 pm]
+                                                Marketplace Agreements.                                 will not accept unsolicited proposals.                BILLING CODE 4120–01–P
+lotter on DSK8BHNXB4PROD with PROPOSALS1
+
+
+
+
+                                           VerDate Sep<11>2014   17:06 Feb 26, 2026   Jkt 268001   PO 00000   Frm 00077   Fmt 4702   Sfmt 9990   E:\FR\FM\27FEP1.SGM   27FEP1
+

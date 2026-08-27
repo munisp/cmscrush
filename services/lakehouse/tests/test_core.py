@@ -1,4 +1,10 @@
-from crush_lakehouse.core import assert_log_safe, event_partition, haversine_feature, stable_event_hash
+from crush_lakehouse.core import (
+    assert_log_safe,
+    event_partition,
+    haversine_feature,
+    stable_event_hash,
+    validate_bronze_event,
+)
 
 
 def event() -> dict[str, object]:
@@ -41,3 +47,22 @@ def test_haversine_geo_feature_has_quality_flag() -> None:
     assert 320 < feature.provider_distance_km < 340
     assert feature.geography_quality == "USABLE"
     assert feature.calculation_version == "haversine-v1"
+
+
+def test_bronze_schema_contract_classifies_valid_drift_and_quarantine() -> None:
+    assert validate_bronze_event(event()).status == "VALID"
+    drifted = dict(event(), source_batch="new-upstream-field")
+    drift_result = validate_bronze_event(drifted)
+    assert drift_result.status == "DRIFT_DETECTED"
+    assert drift_result.unexpected_fields == ("source_batch",)
+    malformed = dict(event())
+    del malformed["raw_ref"]
+    invalid_result = validate_bronze_event(malformed)
+    assert invalid_result.status == "QUARANTINED"
+    assert "missing:raw_ref" in invalid_result.errors
+
+
+def test_schema_fingerprint_is_order_independent() -> None:
+    first = validate_bronze_event(event()).schema_fingerprint
+    second = validate_bronze_event({key: event()[key] for key in reversed(tuple(event()))}).schema_fingerprint
+    assert first == second

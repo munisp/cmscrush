@@ -15,6 +15,10 @@ CREATE TABLE IF NOT EXISTS crush_bronze_source_envelopes (
   occurred_at TIMESTAMP,
   ingested_at TIMESTAMP NOT NULL,
   schema_version STRING NOT NULL,
+  schema_fingerprint STRING NOT NULL,
+  validation_status STRING NOT NULL,
+  validation_errors ARRAY<STRING>,
+  unexpected_fields ARRAY<STRING>,
   ingestion_run_id STRING NOT NULL,
   legal_hold BOOLEAN,
   CONSTRAINT bronze_source_event_unique EXPECT (source_event_id IS NOT NULL) ON VIOLATION DROP ROW
