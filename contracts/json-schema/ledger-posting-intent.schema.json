@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crush.platform/contracts/v1/ledger-posting-intent.schema.json",
+  "title": "CRUSH LedgerPostingIntent",
+  "description": "Intent for a double-entry control ledger. It is not a payment or settlement command.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["intent_uid", "tenant_id", "decision_uid", "kind", "amount", "currency", "debit_account", "credit_account", "idempotency_key", "created_at", "authorization"],
+  "properties": {
+    "intent_uid": {"type": "string", "pattern": "^lpi_[A-Za-z0-9_-]{8,}$"},
+    "tenant_id": {"type": "string", "pattern": "^[a-z][a-z0-9-]{2,62}$"},
+    "decision_uid": {"type": "string", "pattern": "^dec_[A-Za-z0-9_-]{8,}$"},
+    "kind": {"enum": ["EXPOSURE_ESTIMATE", "RESERVE_HOLD", "RESERVE_RELEASE", "RECONCILIATION"]},
+    "amount": {"type": "integer", "minimum": 0, "description": "Minor currency units only."},
+    "currency": {"const": "USD"},
+    "debit_account": {"type": "string", "pattern": "^[a-z0-9:_-]+$"},
+    "credit_account": {"type": "string", "pattern": "^[a-z0-9:_-]+$"},
+    "idempotency_key": {"type": "string", "minLength": 16, "maxLength": 255},
+    "created_at": {"type": "string", "format": "date-time"},
+    "authorization": {"type": "object", "additionalProperties": false, "required": ["source", "human_approved"], "properties": {"source": {"enum": ["DECISION_SERVICE", "CASE_WORKFLOW", "RECONCILIATION"]}, "human_approved": {"type": "boolean"}, "approver_id": {"type": ["string", "null"]}}}
+  },
+  "allOf": [
+    {"if": {"properties": {"kind": {"const": "RESERVE_HOLD"}}}, "then": {"properties": {"authorization": {"properties": {"human_approved": {"const": true}}, "required": ["approver_id"]}}}}
+  ]
+}

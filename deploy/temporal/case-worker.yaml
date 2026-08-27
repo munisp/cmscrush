@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: case-workflow-worker
+  namespace: crush-demo-tenant-dev
+  labels:
+    app.kubernetes.io/name: case-workflow-worker
+    crush.platform/tenant: demo-tenant
+    kubecost.com/tenant: demo-tenant
+    kubecost.com/cost-center: platform-integrity
+spec:
+  replicas: 2
+  selector:
+    matchLabels: {app.kubernetes.io/name: case-workflow-worker}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: case-workflow-worker
+        crush.platform/tenant: demo-tenant
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: case-workflow-worker
+    spec:
+      securityContext: {seccompProfile: {type: RuntimeDefault}}
+      containers:
+        - name: worker
+          image: ghcr.io/munisp/cmscrush/case-workflow:0.1.0
+          env:
+            - {name: TEMPORAL_ADDRESS, value: temporal-frontend.temporal.svc.cluster.local:7233}
+            - {name: TEMPORAL_NAMESPACE, value: crush-demo-tenant-dev}
+            - {name: TEMPORAL_TASK_QUEUE, value: crush-case-review-v1}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            capabilities: {drop: ["ALL"]}
+# Provision the Temporal namespace separately with retention >= the statutory appeal horizon.
+# Only this worker has permission to execute the case-review task queue.

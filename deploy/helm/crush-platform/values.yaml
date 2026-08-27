@@ -1,0 +1,54 @@
+global:
+  environment: dev
+  imagePullPolicy: IfNotPresent
+  tenantId: demo-tenant
+  costCenter: platform-integrity
+  dataClassification: synthetic
+  keycloakIssuer: https://keycloak.example.invalid/realms/crush
+  daprEnabled: true
+
+images:
+  decisionService: ghcr.io/munisp/cmscrush/decision-service:0.1.0
+  caseWorkflow: ghcr.io/munisp/cmscrush/case-workflow:0.1.0
+  analyticsQuery: ghcr.io/munisp/cmscrush/analytics-query:0.1.0
+  lakehouseJobs: ghcr.io/munisp/cmscrush/lakehouse-jobs:0.1.0
+
+resources:
+  decisionService:
+    requests: {cpu: 250m, memory: 256Mi}
+    limits: {cpu: "1", memory: 512Mi}
+  analyticsQuery:
+    requests: {cpu: 250m, memory: 512Mi}
+    limits: {cpu: "2", memory: 2Gi}
+
+service:
+  decisionServicePort: 8080
+  analyticsQueryPort: 8090
+
+external:
+  kafka:
+    brokers: kafka.kafka.svc.cluster.local:9092
+  redis:
+    host: redis.redis.svc.cluster.local
+    port: 6379
+  postgres:
+    host: postgres.postgres.svc.cluster.local
+    port: 5432
+  temporal:
+    address: temporal-frontend.temporal.svc.cluster.local:7233
+  tigerbeetle:
+    address: tigerbeetle.tigerbeetle.svc.cluster.local:3000
+  opensearch:
+    endpoint: https://opensearch-cluster-master.opensearch.svc:9200
+
+security:
+  requirePurposeOfUse: true
+  allowMojaloopSettlement: false
+  defaultDenyNetwork: true
+  imageDigestRequired: true
+
+featureFlags:
+  fluvioTelemetry: false
+  mojaloopAdapter: false
+  rayModelTraining: false
+  openctiEnrichment: false

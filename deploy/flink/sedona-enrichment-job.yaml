@@ -1,0 +1,32 @@
+apiVersion: flink.apache.org/v1beta1
+kind: FlinkDeployment
+metadata:
+  name: crush-sedona-enrichment
+  namespace: crush-demo-tenant-dev
+  labels:
+    crush.platform/tenant: demo-tenant
+    kubecost.com/tenant: demo-tenant
+    kubecost.com/cost-center: platform-integrity
+spec:
+  image: ghcr.io/munisp/cmscrush/lakehouse-jobs:0.1.0
+  flinkVersion: v2_0
+  serviceAccount: flink-crush
+  flinkConfiguration:
+    taskmanager.numberOfTaskSlots: "4"
+    state.backend.type: rocksdb
+    state.checkpoints.dir: s3://crush-demo-tenant-dev/flink/checkpoints
+    state.savepoints.dir: s3://crush-demo-tenant-dev/flink/savepoints
+    execution.checkpointing.interval: 30s
+    execution.checkpointing.mode: EXACTLY_ONCE
+    pipeline.name: crush-sedona-enrichment
+  jobManager:
+    resource: {memory: "2048m", cpu: 1}
+  taskManager:
+    resource: {memory: "4096m", cpu: 2}
+  job:
+    entryClass: org.apache.flink.client.python.PythonDriver
+    args: ["-pyclientexec", "python3", "-py", "/app/crush_lakehouse/jobs.py"]
+    parallelism: 4
+    upgradeMode: savepoint
+# Kafka source topics are tenant scoped: crush.demo-tenant.claims.v1.
+# The job may emit geo/velocity feature events but never a final payment or adverse action.

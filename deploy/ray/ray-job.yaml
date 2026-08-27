@@ -1,0 +1,46 @@
+apiVersion: ray.io/v1
+kind: RayJob
+metadata:
+  name: crush-risk-training
+  namespace: crush-demo-tenant-dev
+  labels:
+    crush.platform/tenant: demo-tenant
+    crush.platform/workload: model-training
+    kubecost.com/tenant: demo-tenant
+    kubecost.com/cost-center: platform-integrity
+spec:
+  entrypoint: >-
+    python -c "from crush_lakehouse.jobs import ray_risk_training; print(ray_risk_training('s3://crush-demo-tenant-dev/gold/training', 's3://crush-demo-tenant-dev/ml/models/fwa-supervised'))"
+  shutdownAfterJobFinishes: true
+  ttlSecondsAfterFinished: 86400
+  rayClusterSpec:
+    rayVersion: "2.40.0"
+    headGroupSpec:
+      serviceType: ClusterIP
+      rayStartParams: {dashboard-host: "0.0.0.0"}
+      template:
+        metadata:
+          labels: {crush.platform/tenant: demo-tenant}
+        spec:
+          containers:
+            - name: ray-head
+              image: ghcr.io/munisp/cmscrush/lakehouse-jobs:0.1.0
+              resources: {requests: {cpu: "1", memory: 4Gi}, limits: {cpu: "2", memory: 8Gi}}
+              securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, runAsNonRoot: true, capabilities: {drop: ["ALL"]}}
+    workerGroupSpecs:
+      - groupName: training-workers
+        replicas: 2
+        minReplicas: 0
+        maxReplicas: 8
+        rayStartParams: {}
+        template:
+          metadata:
+            labels: {crush.platform/tenant: demo-tenant}
+          spec:
+            containers:
+              - name: ray-worker
+                image: ghcr.io/munisp/cmscrush/lakehouse-jobs:0.1.0
+                resources: {requests: {cpu: "2", memory: 8Gi}, limits: {cpu: "4", memory: 16Gi}}
+                securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, runAsNonRoot: true, capabilities: {drop: ["ALL"]}}
+# Release policy: a Ray job produces artifacts only. A separate governance pipeline validates
+# data lineage, metrics, fairness, model card, license, security, and approval before shadow use.

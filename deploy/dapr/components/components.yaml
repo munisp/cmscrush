@@ -1,0 +1,64 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: crush-kafka-pubsub
+  namespace: crush-demo-tenant-dev
+spec:
+  type: pubsub.kafka
+  version: v1
+  metadata:
+    - name: brokers
+      value: kafka.kafka.svc.cluster.local:9092
+    - name: consumerGroup
+      value: crush-decision-service
+    - name: authType
+      value: mtls
+    - name: disableTls
+      value: "false"
+---
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: crush-idempotency-state
+  namespace: crush-demo-tenant-dev
+spec:
+  type: state.redis
+  version: v1
+  metadata:
+    - name: redisHost
+      value: redis.redis.svc.cluster.local:6379
+    - name: actorStateStore
+      value: "false"
+    - name: keyPrefix
+      value: name
+---
+apiVersion: dapr.io/v1alpha1
+kind: Configuration
+metadata:
+  name: crush-resiliency
+  namespace: crush-demo-tenant-dev
+spec:
+  tracing:
+    samplingRate: "0.01"
+  metric:
+    enabled: true
+  features:
+    - name: AppHealthCheck
+      enabled: true
+  resiliency:
+    policies:
+      retries:
+        shortRetry:
+          policy: constant
+          duration: 100ms
+          maxRetries: 2
+      timeouts:
+        dependencyTimeout: 300ms
+    targets:
+      apps:
+        inference-gateway:
+          timeout: dependencyTimeout
+          retry: shortRetry
+        screening-service:
+          timeout: dependencyTimeout
+          retry: shortRetry

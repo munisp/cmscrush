@@ -1,0 +1,15 @@
+apiVersion: v2
+name: crush-platform
+description: CRUSH Integrity Platform foundation with human-gated decisioning and Delta/Parquet lakehouse boundaries
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+kubeVersion: ">=1.30.0-0"
+keywords:
+  - healthcare-integrity
+  - lakehouse
+  - decisioning
+  - temporal
+  - kafka
+maintainers:
+  - name: CRUSH Platform Team

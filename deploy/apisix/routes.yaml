@@ -1,0 +1,67 @@
+# Declarative APISIX configuration. Secrets are referenced through the deployment secret manager, never committed.
+routes:
+  - id: decision-api-v1
+    uri: /v1/claims/decisions
+    methods: [POST]
+    upstream:
+      type: roundrobin
+      nodes:
+        "decision-service.crush-demo-tenant-dev.svc.cluster.local:8080": 1
+    plugins:
+      openid-connect:
+        bearer_only: true
+        discovery: https://keycloak.example.invalid/realms/crush/.well-known/openid-configuration
+        client_id: crush-api
+        set_access_token_header: true
+      serverless-pre-function:
+        phase: rewrite
+        functions:
+          - |
+            local claims = ngx.ctx.authenticated_credential and ngx.ctx.authenticated_credential.userinfo or {}
+            local tenant = claims["crush_tenant"]
+            if not tenant then return 403, { error = "missing_tenant_claim" } end
+            ngx.req.set_header("X-CRUSH-Tenant-ID", tenant)
+            if not ngx.req.get_headers()["Purpose-Of-Use"] then return 400, { error = "missing_purpose_of_use" } end
+      limit-count:
+        count: 120
+        time_window: 60
+        rejected_code: 429
+        key_type: var_combination
+        key: "$http_x_crush_tenant_id $consumer_name"
+      request-id: {}
+      opentelemetry:
+        sampler:
+          name: always_on
+  - id: decision-read-v1
+    uri: /v1/decisions/*
+    methods: [GET]
+    upstream:
+      type: roundrobin
+      nodes:
+        "decision-service.crush-demo-tenant-dev.svc.cluster.local:8080": 1
+    plugins:
+      openid-connect:
+        bearer_only: true
+        discovery: https://keycloak.example.invalid/realms/crush/.well-known/openid-configuration
+        client_id: crush-api
+      request-id: {}
+  - id: analytics-plan-v1
+    uri: /v1/analytics/plan
+    methods: [GET]
+    upstream:
+      type: roundrobin
+      nodes:
+        "analytics-query.crush-demo-tenant-dev.svc.cluster.local:8090": 1
+    plugins:
+      openid-connect:
+        bearer_only: true
+        discovery: https://keycloak.example.invalid/realms/crush/.well-known/openid-configuration
+        client_id: crush-api
+      request-validation:
+        header_schema:
+          type: object
+          required: [Purpose-Of-Use]
+          properties:
+            Purpose-Of-Use: {type: string, minLength: 1}
+      request-id: {}
+# `SUSPEND`, `DENY`, payment settlement, and raw-PHI bulk export routes are deliberately absent.

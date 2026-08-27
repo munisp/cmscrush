@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crush.platform/contracts/v1/case-task.schema.json",
+  "title": "CRUSH CaseTask",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["case_uid", "decision_uid", "tenant_id", "requested_action", "reason_codes", "created_at", "statutory_clock", "evidence_refs"],
+  "properties": {
+    "case_uid": {"type": "string", "pattern": "^case_[A-Za-z0-9_-]{8,}$"},
+    "decision_uid": {"type": "string", "pattern": "^dec_[A-Za-z0-9_-]{8,}$"},
+    "tenant_id": {"type": "string", "pattern": "^[a-z][a-z0-9-]{2,62}$"},
+    "requested_action": {"enum": ["PEND_REVIEW", "PREPAY_DOC_REQUEST", "DENY_RECOMMEND", "SUSPEND_RECOMMEND", "REFER"]},
+    "reason_codes": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "created_at": {"type": "string", "format": "date-time"},
+    "statutory_clock": {"type": "object", "additionalProperties": false, "required": ["deadline_at", "kind"], "properties": {"deadline_at": {"type": "string", "format": "date-time"}, "kind": {"enum": ["REVIEW", "DOC_RESPONSE", "SUSPENSION_REVIEW", "REBUTTAL", "APPEAL"]}}},
+    "evidence_refs": {"type": "array", "items": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}}
+  }
+}

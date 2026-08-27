@@ -1,0 +1,33 @@
+# open-appsec declarative policy. Apply through the supported Helm/CRD installation for the selected cluster.
+apiVersion: openappsec.io/v1beta2
+kind: Policy
+metadata:
+  name: crush-public-api-protection
+  namespace: apisix
+spec:
+  defaultMode: prevent-learn
+  practices:
+    webAttacks:
+      mode: prevent-learn
+      protections:
+        minimumConfidenceForPrevent: medium
+    apiProtection:
+      mode: prevent-learn
+      schemaValidation: true
+    botProtection:
+      mode: prevent-learn
+    rateLimit:
+      mode: prevent
+  triggers:
+    - appsecClassName: appsec-crush-public
+      scope:
+        type: all
+      protectedResources:
+        - uri: /v1/claims/decisions
+          method: POST
+        - uri: /v1/coding/jobs
+          method: POST
+        - uri: /v1/forensics/analyze
+          method: POST
+# The WAF handles malicious HTTP/API traffic. It must not forward raw request bodies into
+# OpenSearch/Wazuh/OpenCTI or become an independent PHI retention system.

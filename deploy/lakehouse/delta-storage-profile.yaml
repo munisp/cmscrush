@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: crush-delta-storage-profile
+  namespace: crush-demo-tenant-dev
+  labels:
+    crush.platform/tenant: demo-tenant
+    crush.platform/table-format: delta
+    crush.platform/physical-format: parquet
+    kubecost.com/tenant: demo-tenant
+    kubecost.com/cost-center: platform-integrity
+data:
+  storage-profile.yaml: |
+    version: v1
+    table_format: delta
+    physical_format: parquet
+    catalog: tenant-scoped-delta-catalog
+    bucket: s3://crush-demo-tenant-dev
+    zones:
+      bronze:
+        prefix: bronze/
+        object_lock: required
+        versioning: required
+        allowed_writers: [ingest-normalizers]
+      silver:
+        prefix: silver/
+        allowed_writers: [spark-sedona-jobs, flink-sedona-jobs]
+      gold:
+        prefix: gold/
+        allowed_writers: [spark-sedona-jobs, ray-governed-jobs]
+      audit:
+        prefix: audit/
+        object_lock: required
+        versioning: required
+        allowed_writers: [audit-service]
+    partitioning:
+      claims: [program, received_date]
+      decisions: [decided_date]
+      geo_features: [feature_date]
+    delta_properties:
+      delta.appendOnly: "false"
+      delta.enableChangeDataFeed: "true"
+      delta.deletedFileRetentionDuration: "interval 7 days"
+      delta.logRetentionDuration: "interval 365 days"
+    invariants:
+      - tenant_id_mandatory
+      - no_cross_tenant_table_paths
+      - raw_payload_hash_mandatory
+      - schema_version_mandatory
+      - data_quality_flags_preserved

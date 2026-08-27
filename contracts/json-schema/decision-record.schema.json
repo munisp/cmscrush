@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crush.platform/contracts/v1/decision-record.schema.json",
+  "title": "CRUSH DecisionRecord",
+  "description": "Append-only, hash-linked decision record. Final adverse actions are intentionally excluded from the action vocabulary.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "decision_uid", "tenant_id", "idempotency_key", "decided_at", "subject", "action",
+    "reason_codes", "risk", "inputs", "models", "rules", "degraded", "human_review",
+    "audit", "schema_version"
+  ],
+  "properties": {
+    "decision_uid": {"type": "string", "pattern": "^dec_[A-Za-z0-9_-]{8,}$"},
+    "tenant_id": {"type": "string", "pattern": "^[a-z][a-z0-9-]{2,62}$"},
+    "idempotency_key": {"type": "string", "minLength": 16, "maxLength": 255},
+    "decided_at": {"type": "string", "format": "date-time"},
+    "subject": {
+      "type": "object", "additionalProperties": false, "required": ["claim_control_number"],
+      "properties": {
+        "claim_control_number": {"type": "string"},
+        "provider_uid": {"type": ["string", "null"]},
+        "beneficiary_uid": {"type": ["string", "null"]}
+      }
+    },
+    "action": {"enum": ["PAY", "PEND_REVIEW", "PREPAY_DOC_REQUEST", "DENY_RECOMMEND", "SUSPEND_RECOMMEND", "REFER"]},
+    "reason_codes": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^RC-[0-9]{3}-[A-Z0-9-]+$"}},
+    "risk": {
+      "type": "object", "additionalProperties": false, "required": ["score", "conformal_lower", "conformal_upper", "tier"],
+      "properties": {
+        "score": {"type": "number", "minimum": 0, "maximum": 1},
+        "conformal_lower": {"type": "number", "minimum": 0, "maximum": 1},
+        "conformal_upper": {"type": "number", "minimum": 0, "maximum": 1},
+        "tier": {"enum": ["LOW", "MED", "HIGH", "CRITICAL"]}
+      }
+    },
+    "inputs": {
+      "type": "object", "additionalProperties": false, "required": ["feature_vector_hash", "feature_definitions_version"],
+      "properties": {"feature_vector_hash": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}, "feature_definitions_version": {"type": "string"}}
+    },
+    "models": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["model_id", "version", "score", "abstained", "latency_ms"], "properties": {"model_id": {"type": "string"}, "version": {"type": "string"}, "score": {"type": "number"}, "abstained": {"type": "boolean"}, "latency_ms": {"type": "integer", "minimum": 0}}}},
+    "rules": {"type": "object", "additionalProperties": false, "required": ["ruleset_version", "fired"], "properties": {"ruleset_version": {"type": "string"}, "fired": {"type": "array", "items": {"type": "string"}}}},
+    "degraded": {"type": "boolean"},
+    "human_review": {"type": "object", "additionalProperties": false, "required": ["required"], "properties": {"required": {"type": "boolean"}, "reviewer_id": {"type": ["string", "null"]}, "decided_at": {"type": ["string", "null"], "format": "date-time"}}},
+    "audit": {"type": "object", "additionalProperties": false, "required": ["record_hash", "previous_record_hash", "trace_id", "purpose_of_use"], "properties": {"record_hash": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}, "previous_record_hash": {"type": "string", "pattern": "^(sha256:[a-f0-9]{64}|GENESIS)$"}, "trace_id": {"type": "string"}, "purpose_of_use": {"type": "string", "minLength": 1}}},
+    "schema_version": {"const": "1.0.0"}
+  }
+}

@@ -1,0 +1,28 @@
+# Fluvio is intentionally secondary to the Kafka/Flink regulated data plane.
+# Do not create claim, document, decision, case, ledger, or audit topics in this cluster.
+apiVersion: fluvio.infinyon.com/v1
+kind: Topic
+metadata:
+  name: crush-platform-nonphi-telemetry
+  namespace: platform-telemetry
+  labels:
+    crush.platform/data-classification: non-phi
+    kubecost.com/cost-center: platform-observability
+spec:
+  partitions: 3
+  replicationFactor: 3
+  cleanupPolicy: segment
+  retentionTime: 604800
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluvio-usage-policy
+  namespace: platform-telemetry
+data:
+  policy.md: |
+    Permitted payload fields: service, version, environment, tenant_pseudonym, event_kind,
+    latency_ms, status_code, resource_class, trace_id_hash.
+    Prohibited payload fields: claim, document, clinical, beneficiary, provider identifier,
+    contact point, raw request, raw response, ledger amount, decision payload.
+    Kafka remains the sole canonical transport for all regulated CRUSH events.

@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: crush-security-telemetry
+  namespace: security-operations
+  labels:
+    app.kubernetes.io/part-of: crush-platform
+    crush.platform/data-classification: security-telemetry
+    kubecost.com/cost-center: security-operations
+data:
+  telemetry-policy.yaml: |
+    version: v1
+    sources:
+      wazuh:
+        enabled: true
+        permitted_events: [container_security, file_integrity, vulnerability, configuration_assessment]
+        target: opensearch-security
+      opencti:
+        enabled: false
+        permitted_objects: [indicator, observable, malware, intrusion-set]
+        target: security-screening-adapter
+    prohibitions:
+      - no_raw_claim_payloads
+      - no_document_content
+      - no_beneficiary_identifiers
+      - no_provider_direct_identifiers
+      - no_automated_claim_action_from_security_signal
+    opensearch:
+      index_prefix: crush-security-
+      retention_days: 90
+      field_redaction: [authorization, cookie, set-cookie, request_body, response_body, ssn, tin, name, address, phone, email]
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: security-telemetry-isolation
+  namespace: security-operations
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/part-of: crush-platform
+  policyTypes: [Egress]
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels: {kubernetes.io/metadata.name: opensearch}
+      ports: [{protocol: TCP, port: 9200}]
+    - to:
+        - namespaceSelector:
+            matchLabels: {kubernetes.io/metadata.name: kube-system}
+      ports: [{protocol: UDP, port: 53}, {protocol: TCP, port: 53}]
+# There is intentionally no egress from security operations into a tenant PHI namespace.

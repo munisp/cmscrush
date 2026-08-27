@@ -1,0 +1,21 @@
+# Runtime dependencies and build outputs
+**/node_modules/
+**/dist/
+**/target/
+**/__pycache__/
+**/.pytest_cache/
+*.py[cod]
+
+# Local environments and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Local data and operational state
+.local/
+coverage/
+.DS_Store

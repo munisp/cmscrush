@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crush-lakehouse"
+version = "0.1.0"
+description = "CRUSH Delta Lake, Parquet, Spark, Flink, Ray, and Sedona data platform foundation"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+runtime = [
+  "delta-spark>=3.3,<4",
+  "pyspark>=3.5,<4",
+  "apache-sedona>=1.7,<2",
+  "pyflink>=2.0,<3",
+  "ray[data,train,serve]>=2.40,<3",
+  "pyarrow>=17,<22",
+  "kafka-python-ng>=2.2,<3"
+]
+test = ["pytest>=8.0,<9"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
