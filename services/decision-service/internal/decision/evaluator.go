@@ -151,6 +151,14 @@ func (e Evaluator) evaluateRules(input DecisionInput, now time.Time) ([]string, 
 		hardStop = true
 	}
 
+	for _, signal := range input.Features.UseCaseSignals {
+		if strings.TrimSpace(signal) == "" || strings.HasPrefix(signal, "NO_") || signal == "DATA_INSUFFICIENT" {
+			continue
+		}
+		reasons = append(reasons, "RC-UC-"+strings.ToUpper(signal))
+		rules = append(rules, "USECASE-"+strings.ToUpper(signal))
+	}
+
 	sort.Strings(reasons)
 	sort.Strings(rules)
 	return unique(reasons), unique(rules), hardStop, nil
@@ -192,7 +200,7 @@ func route(hardStop bool, reasons []string, risk Risk, degraded bool) string {
 	if degraded {
 		return "PAY"
 	}
-	if contains(reasons, "RC-135-CLINICAL-IMPLAUSIBLE") || risk.Tier == "CRITICAL" {
+	if contains(reasons, "RC-135-CLINICAL-IMPLAUSIBLE") || containsPrefix(reasons, "RC-UC-") || risk.Tier == "CRITICAL" {
 		return "PEND_REVIEW"
 	}
 	switch risk.Tier {
@@ -274,6 +282,15 @@ func clamp(value float64) float64 {
 func contains(values []string, expected string) bool {
 	for _, value := range values {
 		if value == expected {
+			return true
+		}
+	}
+	return false
+}
+
+func containsPrefix(values []string, prefix string) bool {
+	for _, value := range values {
+		if strings.HasPrefix(value, prefix) {
 			return true
 		}
 	}

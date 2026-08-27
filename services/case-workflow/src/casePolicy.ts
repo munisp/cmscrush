@@ -5,6 +5,31 @@ export type RecommendedAction =
   | "SUSPEND_RECOMMEND"
   | "REFER";
 
+export type TopFiveUseCase =
+  | "REVOKED_PROVIDER_MIGRATION"
+  | "LAB_REFERRAL_RING"
+  | "DMEPOS_INTEGRITY"
+  | "CLAIMS_INTEGRITY"
+  | "AI_CODING_OVERSIGHT";
+
+export type UseCaseSeverity = "LOW" | "MED" | "HIGH" | "UNKNOWN";
+
+export interface UseCaseSignal {
+  use_case: TopFiveUseCase;
+  signal_id: string;
+  severity: UseCaseSeverity;
+  abstained: boolean;
+  reason: string;
+  evidence_refs: string[];
+}
+
+/** Map signals to human queues; this function never returns an autonomous adverse action. */
+export function recommendedActionForSignal(signal: UseCaseSignal): RecommendedAction {
+  if (signal.abstained || signal.severity === "UNKNOWN") return "PREPAY_DOC_REQUEST";
+  if (signal.severity === "HIGH" || signal.severity === "MED") return "PEND_REVIEW";
+  return "PREPAY_DOC_REQUEST";
+}
+
 export type CaseState =
   | "OPEN"
   | "UNDER_REVIEW"

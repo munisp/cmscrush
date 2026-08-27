@@ -4,7 +4,16 @@ use datafusion::arrow::record_batch::RecordBatch;
 use datafusion::prelude::{ParquetReadOptions, SessionContext};
 use serde::{Deserialize, Serialize};
 
-const APPROVED_DATASETS: &[&str] = &["provider_360", "decision_metrics", "geo_features"];
+const APPROVED_DATASETS: &[&str] = &[
+    "provider_360",
+    "decision_metrics",
+    "geo_features",
+    "provider_migration_signals",
+    "lab_referral_signals",
+    "dmepos_integrity_signals",
+    "claims_integrity_signals",
+    "coding_oversight_signals",
+];
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct AnalyticsRequest {

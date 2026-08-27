@@ -57,13 +57,14 @@ type ClaimEvent struct {
 }
 
 type Features struct {
-	VectorHash             string  `json:"vector_hash"`
-	DefinitionsVersion     string  `json:"definitions_version"`
-	PeerOutlierScore       float64 `json:"peer_outlier_score"`
-	GraphRiskScore         float64 `json:"graph_risk_score"`
-	SharedBankAccountCount int     `json:"shared_bank_account_count"`
-	GeoImprobabilityScore  float64 `json:"geo_improbability_score"`
-	FreshnessSeconds       int     `json:"freshness_seconds"`
+	VectorHash             string   `json:"vector_hash"`
+	DefinitionsVersion     string   `json:"definitions_version"`
+	PeerOutlierScore       float64  `json:"peer_outlier_score"`
+	GraphRiskScore         float64  `json:"graph_risk_score"`
+	SharedBankAccountCount int      `json:"shared_bank_account_count"`
+	GeoImprobabilityScore  float64  `json:"geo_improbability_score"`
+	FreshnessSeconds       int      `json:"freshness_seconds"`
+	UseCaseSignals         []string `json:"use_case_signals,omitempty"`
 }
 
 type Screening struct {

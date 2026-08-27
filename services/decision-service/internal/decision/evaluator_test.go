@@ -53,6 +53,24 @@ func TestModelOutageEmitsRulesOnlyDegradedPayment(t *testing.T) {
 	}
 }
 
+func TestUseCaseSignalCreatesHumanReviewCase(t *testing.T) {
+	now := time.Date(2026, 8, 27, 10, 0, 0, 0, time.UTC)
+	evaluator := NewEvaluator()
+	evaluator.Clock = func() time.Time { return now }
+	input := validInput(now)
+	input.Features.UseCaseSignals = []string{"PROVIDER_BILLED_AFTER_REVOCATION_IN_MA"}
+	result, err := evaluator.Evaluate(input, "GENESIS")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if result.Decision.Action != "PEND_REVIEW" || result.CaseTask == nil {
+		t.Fatalf("use-case signal must create human review, got action=%s case=%v", result.Decision.Action, result.CaseTask)
+	}
+	if !contains(result.Decision.ReasonCodes, "RC-UC-PROVIDER_BILLED_AFTER_REVOCATION_IN_MA") {
+		t.Fatalf("use-case reason missing: %#v", result.Decision.ReasonCodes)
+	}
+}
+
 func TestDeliveryBeforeOrderRequiresHumanReview(t *testing.T) {
 	now := time.Date(2026, 8, 27, 10, 0, 0, 0, time.UTC)
 	evaluator := NewEvaluator()
